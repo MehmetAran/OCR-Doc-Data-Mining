@@ -1,0 +1,3 @@
+Öğrenci No;Öğrenci Bilgileri;No;;Adı, Soyadı;!
+Adı, Soyadı;No;Adı, Soyadı;;Anabilim Dalı;!
+Anabilim Dalı;Adı, Soyadı;Anabilim Dalı;;Program;!
