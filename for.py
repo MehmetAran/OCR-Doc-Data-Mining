@@ -1,14 +1,19 @@
-try:
-    from PIL import Image
-except ImportError:
-    import Image
- import pytesseract 
+import folder_file_operation as ffo
+import pytesseract
 
-def ocr_core(filename):
-    """
-    This function will handle the core OCR processing of images.
-    """
-    text = pytesseract.image_to_string(Image.open(filename))  # We'll use Pillow's Image class to open the image and pytesseract to detect the string in the image
-    return text
 
-print(ocr_core('images/ocr_example_1.png'))
+ffo.pdf_to_jpeg("C:\\Users\\warri\\Downloads\\Documents\\esrarileiliskilibozukluklar-bab9021e.pdf",'./images')
+images = ffo.all_files_in_folder('./images')
+
+string = ""
+for image in images:
+    string += pytesseract.image_to_string(image,lang="tur")
+
+
+print(string)
+
+file1 = open("./documents/aysenin ödevi.txt","w",encoding="utf-8") 
+  
+file1.write("Hello \n") 
+file1.writelines(string) 
+file1.close() 

@@ -20,8 +20,8 @@ class MainPage(QDialog):
         theClass.exec()
 
     def readDoc(self):
-        from readDocument import ReadDocument
-        readDocument = ReadDocument()
+        from DocumentOperation import DocumentOperation
+        readDocument = DocumentOperation()
         informations = readDocument.readDoc()
         
         for information1,information2 in zip(informations[0],informations[1]):

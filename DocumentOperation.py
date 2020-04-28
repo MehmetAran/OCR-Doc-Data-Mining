@@ -6,9 +6,13 @@ import cv2
 import pytesseract
 import re 
 import os
+from pytesseract import Output
+import numpy
 
 
-class ReadDocument:
+
+
+class DocumentOperation:
     def readDoc(self):
         Tk().withdraw()
         filename = askopenfilename()
@@ -18,14 +22,17 @@ class ReadDocument:
 
         size = len(images)
         imageDataText = ""
+        imageDataText2 = ""
+
         counter = 0 
         while counter < size:
             #image = cv2.imread(images[counter])
             #gray = imgp.get_grayscale(image)
             #tresh = imgp.thresholding(gray)
             #deskew = imgp.deskew(images[counter])
-            print(images[counter])
-            imageDataText += pytesseract.image_to_string(images[counter],lang="tur")
+            imageDataText += pytesseract.image_to_string(image=images[counter] ,lang="tur")
+            imageDataText2 += pytesseract.image_to_data(image=images[counter] ,lang="tur")
+            print(imageDataText2)
             counter += 1
 
 
@@ -95,4 +102,20 @@ class ReadDocument:
         allInformations.append(parsingData)
         return allInformations
 
+    def getAllDataFromPDF(self):
+        Tk().withdraw()
+        filename = askopenfilename()
+        ffo.delete_all_files_in_folder('./images')
+        ffo.pdf_to_jpeg(filename,'./images')
+        images = ffo.all_files_in_folder('./images')
+
+        size = len(images)
+        counter = 0
+        data = []
+        while counter < size:
+            dict = pytesseract.image_to_data(images[counter], output_type=Output.DICT,lang="tur")
+            l = list(dict.items())
+            data.append(numpy.array(l))
+            counter += 1
+        return data;
         
