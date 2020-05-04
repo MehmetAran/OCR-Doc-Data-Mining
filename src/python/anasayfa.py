@@ -10,7 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from docOkut import Ui_MainWindow
 from DocumentOperation import DocumentOperation 
-
+import os
 class Ui_DDVT(object):
 
     def readDoc(self):
@@ -76,7 +76,9 @@ class Ui_DDVT(object):
         self.pushButton_5.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.pushButton_5.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./img/logo_ddvt.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        basepath = os.path.abspath(".")
+
+        icon.addPixmap(QtGui.QPixmap(basepath+"/resources/img/logo_ddvt.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_5.setIcon(icon)
         self.pushButton_5.setIconSize(QtCore.QSize(141, 124))
         self.pushButton_5.setAutoRepeatDelay(0)

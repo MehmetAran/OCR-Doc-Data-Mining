@@ -3,6 +3,8 @@ import tkinter as tk
 from tkinter import simpledialog
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
+import os
+from Draw import DrawShapsOnImage
 # now let's initialize the list of reference point 
 ref_point = [] 
 crop = False
@@ -50,8 +52,9 @@ def copyImage(refpoint):
 
 
 
-
-imagepath = "./images/tarama1_0.jpg"
+basePath = os.path.abspath('.')
+imagepath = basePath + "/resources/images/tarama1_0.jpg"
+print(imagepath)
 image = cv2.imread(imagepath) 
 clone = image.copy() 
 cv2.namedWindow("image") 
@@ -67,7 +70,6 @@ while True :
         i += (0.02);
     else:
         break;
-
 while True: 
     dsize = (int(width/scalaWidth), int(height/scalaHeight))
     image = cv2.resize(image, dsize)

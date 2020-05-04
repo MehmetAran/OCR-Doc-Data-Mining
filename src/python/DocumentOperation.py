@@ -8,17 +8,20 @@ import re
 import os
 from pytesseract import Output
 import numpy
-
+import os
 
 
 
 class DocumentOperation:
+
     def readDoc(self):
+
         Tk().withdraw()
         filename = askopenfilename()
-        ffo.delete_all_files_in_folder('./images')
-        ffo.pdf_to_jpeg(filename,'./images')
-        images = ffo.all_files_in_folder('./images')
+        basepath = os.path.abspath(".")
+        ffo.delete_all_files_in_folder(basepath+'/resources/images')
+        ffo.pdf_to_jpeg(filename,basepath+'/resources/images')
+        images = ffo.all_files_in_folder(basepath+'/resources/images')
 
         size = len(images)
         imageDataText = ""
@@ -32,17 +35,16 @@ class DocumentOperation:
             #deskew = imgp.deskew(images[counter])
             imageDataText += pytesseract.image_to_string(image=images[counter] ,lang="tur")
             imageDataText2 += pytesseract.image_to_data(image=images[counter] ,lang="tur")
-            print(imageDataText2)
             counter += 1
 
 
 
-        documents = ffo.all_files_in_folder('./documents')
+        documents = ffo.all_files_in_folder(basepath+'/resources/documents')
         validDocument = ""
         formIndex = 0
         for document in documents:
             operation_document = document.replace("@","/")
-            operation_document = operation_document.replace("./documents\\","")
+            operation_document = operation_document.replace(basepath+"/resources/documents\\","")
             operation_document = operation_document.replace(".txt","")
             operation_document = operation_document.strip()
             if imageDataText.find(operation_document) != -1 :
@@ -100,14 +102,16 @@ class DocumentOperation:
         allInformations = []
         allInformations.append(targetStringsName)
         allInformations.append(parsingData)
+        print(allInformations)
         return allInformations
 
     def getAllDataFromPDF(self):
+        basepath = os.path.abspath(".")
         Tk().withdraw()
         filename = askopenfilename()
-        ffo.delete_all_files_in_folder('./images')
-        ffo.pdf_to_jpeg(filename,'./images')
-        images = ffo.all_files_in_folder('./images')
+        ffo.delete_all_files_in_folder(basepath+'/resources/images')
+        ffo.pdf_to_jpeg(filename,basepath+'/resources/images')
+        images = ffo.all_files_in_folder(basepath+'/resources/images')
 
         size = len(images)
         counter = 0

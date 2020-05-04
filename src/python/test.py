@@ -3,12 +3,14 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+import os
 
 class MainPage(QDialog):
 
     def __init__(self):
         super(MainPage, self).__init__()
-        loadUi('./ui/HomePage.ui', self)
+        basepath = os.path.abspath(".")
+        loadUi(basepath+"/src/ui/Homepage.ui", self)
         # self.pushbutton_2.clicked.connect(self.retrieveText)
         self.btnNewDoc.clicked.connect(self.move)
         self.btnReadDoc.clicked.connect(self.readDoc)

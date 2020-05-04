@@ -8,6 +8,9 @@ from PIL import Image
 import cv2
 from PIL import Image
 import math
+from tempfile import mkstemp
+from shutil import move, copymode
+from os import fdopen, remove
 import os
 
 def pdf_to_jpeg(filepath,outpath):
@@ -67,3 +70,18 @@ def returnStringReadFile(fileName):
     for x in f:
         strings.append(x.replace("\n",""))
     return strings
+
+def replace(file_path, pattern, subst):
+    #Create temp file
+    fh, abs_path = mkstemp()
+    with fdopen(fh,'w',encoding="utf-8") as new_file:
+        with open(file_path,encoding="utf-8") as old_file:
+            for line in old_file:
+                
+                new_file.write(line.replace(pattern, subst))
+    #Copy the file permissions from the old file to the new file
+    copymode(file_path, abs_path)
+    #Remove original file
+    remove(file_path)
+    #Move new file
+    move(abs_path, file_path)
