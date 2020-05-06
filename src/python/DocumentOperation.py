@@ -9,9 +9,6 @@ import os
 from pytesseract import Output
 import numpy
 import os
-
-
-
 class DocumentOperation:
 
     def readDoc(self):
@@ -112,14 +109,17 @@ class DocumentOperation:
         ffo.delete_all_files_in_folder(basepath+'/resources/images')
         ffo.pdf_to_jpeg(filename,basepath+'/resources/images')
         images = ffo.all_files_in_folder(basepath+'/resources/images')
-
+        
         size = len(images)
         counter = 0
         data = []
         while counter < size:
-            dict = pytesseract.image_to_data(images[counter], output_type=Output.DICT,lang="tur")
-            l = list(dict.items())
-            data.append(numpy.array(l))
+            dict = {}
+            dict.update (pytesseract.image_to_data(images[counter], output_type=Output.DICT,lang="tur"))
+            #l = list(dict.items())
+            #data.append(numpy.array(l))
+            data.append(dict)
             counter += 1
+            #print("type : ",type(dict))
         return data;
         
