@@ -30,9 +30,10 @@ class DrawableImage:
         self.tess_point[1] = ( int(self.scalaWidth * ref_point[1][0]),int(self.scalaHeight * ref_point[1][1]));
         crop_img = self.clone[ref_point[0][1]:ref_point[1][1], ref_point[0][0]: 
                                                                ref_point[1][0]]
+        
         cv2.imshow("crop_img", crop_img)
-        MyInputBox.executor()
-
+        #MyInputBox.executor()
+        print(self.tess_point)
 
     def resize(self):
         i = 1;
@@ -54,7 +55,6 @@ class DrawableImage:
         self.resize();
         while True: 
             dsize = (int(self.width/self.scalaWidth), int(self.height/self.scalaHeight))
-            print("dsize : " + str(dsize))
             self.image = cv2.resize(self.image,dsize)
             cv2.imshow("image", self.image) 
             key = cv2.waitKey(1) & 0xFF

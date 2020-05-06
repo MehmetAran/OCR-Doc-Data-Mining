@@ -13,7 +13,6 @@ from DocumentOperation import DocumentOperation
         9           height
         10          conf
         11          text
-
 '''
 #data[i][indexes in here ][1][j]
 
@@ -25,7 +24,7 @@ data = doc.getAllDataFromPDF()
 isFirst = True
 i = 0 
 lastWordNum = 0                                                                            
-                          
+
 for i in range(len(data)):
     for j in range (len(data[i][0][1])):
         x1 =int(data[i][6][1][j])
@@ -45,7 +44,7 @@ for i in range(len(data)):
                 text = data[i][11][1][j]
                 block_num = data[i][2][1][j]
                 print("line_num : ",line_num , "word_num : ", word_num , "text : " , text)
-            
+
             k = j
             for k in range(len(data[0][0][1])):
                 xx1 =int(data[i][6][1][k])
@@ -81,7 +80,7 @@ for i in range(len(data)):
                     bottomText += data[i][4][1][k] 
                 elif(data[i][2][1][k] == block_num+2 and data[i][4][1][k] and data[i][4][1][k] == line_num + 2 ):
                     break;
-            
+
             k = 0
             for k in range(len(data[0][0][1])):
                 if(int(block_num) == int(data[i][2][1][k]) + 1 ):
@@ -99,5 +98,3 @@ for i in range(len(data)):
 
 
             isFirst = False
-
-            #isFirst = False
