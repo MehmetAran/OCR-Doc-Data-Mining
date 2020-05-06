@@ -32,39 +32,41 @@ class FindTextWithCoordinates:
     counter = 0
     selectedItems = None
     def __init__(self): 
-        self.data = self.doc.getAllDataFromPDF()    
+        self.data = self.doc.getAllDataFromPDF()
         for d in self.data:
             self.left.append(d['left'])
             self.width.append(d['width'])
             self.top.append(d['top'])
             self.height.append(d['height'])
             self.text.append(d['text'])
+        
 
     def operations(self,selectedItems):
         self.selectedItems = selectedItems
-        size = len(self.width[self.counter])
         for one in self.selectedItems:
-            for j in range(size):
-                if(self.isExist(self.counter,j)):
-                    pass
-
-            self.counter += 1
-            print("***********************************************************")
-
+            size = len(self.width)
+            for i in range(size):
+                size2 = len(self.width[i])
+                for j in range(size2):
+                    if(self.isExist(i,j)):
+                        print(self.text[i][j])
+            self.counter += 1    
+            
     def isExist(self,i,j):
         leftLocation = self.left[i][j]
         rightLocation = self.left[i][j] + self.width[i][j]
         topLocation = self.top[i][j] 
         bottomLocation = self.top[i][j] +  self.height[i][j]
 
-        selectedLeft = self.selectedItems[i][1]
-        selectedRight = self.selectedItems[i][2]
-        selectedTop = self.selectedItems[i][3]
-        selectedBottom = self.selectedItems[i][4]
+        selectedLeft = self.selectedItems[self.counter][1]
+        selectedRight = self.selectedItems[self.counter][2]
+        selectedTop = self.selectedItems[self.counter][3]
+        selectedBottom = self.selectedItems[self.counter][4]
+
         #print(leftLocation," ",rightLocation," ",topLocation," ",bottomLocation," ",self.text[i][j])
         if(rightLocation <= selectedRight and leftLocation >= selectedLeft 
         and bottomLocation <= selectedBottom  and topLocation >= selectedTop ):
-            print(self.text[i][j])
+            #print(self.text[i][j])
             return True
         return False
 
