@@ -116,10 +116,9 @@ class DocumentOperation:
         while counter < size:
             dict = {}
             dict.update (pytesseract.image_to_data(images[counter], output_type=Output.DICT,lang="tur"))
-            #l = list(dict.items())
-            #data.append(numpy.array(l))
             data.append(dict)
+            print(pytesseract.image_to_data(images[counter],lang="tur"))
+            break
             counter += 1
-            #print("type : ",type(dict))
         return data;
         
