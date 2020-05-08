@@ -59,6 +59,7 @@ class FindTextWithCoordinates:
                 size2 = len(self.width[i])
                 for j in range(size2):
                     if(self.isExist(i,j)):
+                        self.firstAndLastIndexes(i,j)
                         if(isFirstEntry):
                             self.leftText = self.findLeftText(i,j)
                             self.topText = self.findTopText(i,j)
@@ -171,7 +172,7 @@ class FindTextWithCoordinates:
         size  = len(self.text[i])
         if(size <= lastLineIndex+1):
             return ""
-        if(self.block_num[i][lastBlockIndex+1] == blockNum):
+        if(self.block_num[i][lineNum+1] == blockNum):
             print(self.block_num[i][lastBlockIndex+1])
        
     def firstAndLastIndex(self,i,param,startIndex,data):
@@ -189,10 +190,64 @@ class FindTextWithCoordinates:
             k += 1
         return [(firstParam ),(lastParam )] 
 
+
+    def firstAndLastIndexes(self,i,j):
+        [blockNum,lineNum,wordNum] = self.initFindText(i,j)
+        size =len(self.block_num[i])
+        firstBlockIndex = 0
+        lastBlockIndex = 0
+        k = 0
+        isFirstEntry = True
+        while k < size :
+            if(self.block_num[i][k] == blockNum ):
+                if(isFirstEntry):
+                    firstBlockIndex = k
+                    isFirstEntry = False
+                lastBlockIndex = k
+            if(self.block_num[i][k] > blockNum):
+                break
+            k += 1
+    
+        k = firstBlockIndex+2
+        firstLineIndex = 0
+        lastLineIndex = 0
+        isFirstEntry = True
+        while k < size :
+            if(self.line_num[i][k] == lineNum):
+                if(isFirstEntry):
+                    firstLineIndex = k
+                    isFirstEntry = False
+                lastLineIndex = k
+
+            if(self.data[i]['conf'][k+1] == -1 or self.line_num[i][k+1] == 0):
+                break
+            k += 1
+
+            print("conf : ",self.data[i]['conf'][k])
+      
+
+        k = firstLineIndex 
+        while k < lastLineIndex:
+            print(self.text[i][k])
+            k += 1
+
+        print("firstBlockIndex : ",firstBlockIndex)
+        print("lastBlockIndex : ",lastBlockIndex)
+        print("firstBlock Değeri : " , self.text[i][firstBlockIndex])
+        print("lastBlock Değeri : " , self.text[i][lastBlockIndex])
+        print("firstLineIndex : ",firstLineIndex)
+        print("lastLineIndex : ",lastLineIndex)
+
+        print("firstLine Değeri : " , self.text[i][firstLineIndex])
+        print("lastLine Değeri : " , self.text[i][lastLineIndex])
+
+        return [firstBlockIndex,lastBlockIndex,firstLineIndex,lastLineIndex]
+
+
 a = FindTextWithCoordinates()
 selectedItems = []
 
-selectedItems.append(["tamamlayarak",1428,1428+33,1370,1370+13])
+selectedItems.append(["tamamlayarak",493,493+157,1332,1332+25])
 #selectedItems.append(["Mehmet Aytaç ÇINAR",1131,1131+117,1015,1015+23])
 #selectedItems.append([":http://fbe.kocaeli.edu.tr/",605,605+233,2247,2247+20])
 #selectedItems.append(["anlaşıldığından",806,806+174,1332,1332+25])
