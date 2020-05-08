@@ -68,8 +68,9 @@ class FindTextWithCoordinates:
                         self.rightText = self.findRightText(i,j)
                         self.bottomText = self.findBottomText(i,j)
                         self.foundedTexts[self.counter] = [self.leftText , self.rightText,self.topText,self.bottomText]
-            print(self.foundedTexts[self.counter])           
             self.counter += 1    
+        for item in self.foundedTexts:
+            print(item[3])       
 
 
     def isExist(self,i,j):
@@ -83,7 +84,6 @@ class FindTextWithCoordinates:
         selectedTop = self.selectedItems[self.counter][3]
         selectedBottom = self.selectedItems[self.counter][4]
 
-        #print(leftLocation," ",rightLocation," ",topLocation," ",bottomLocation," ",self.text[i][j])
         if(rightLocation <= selectedRight and leftLocation >= selectedLeft 
         and bottomLocation <= selectedBottom  and topLocation >= selectedTop ):
             return True
@@ -109,7 +109,7 @@ class FindTextWithCoordinates:
         left = ""
         k = firstLineIndex
         while k < j:
-            left += self.text[i][k]
+            left += self.text[i][k] +"  "
             k += 1
         return left;
     def findRightText(self,i,j):
@@ -122,7 +122,7 @@ class FindTextWithCoordinates:
         k = j+1
         while k < lastLineIndex:
             if(self.line_num[i][k] == lineNum):
-                right += self.text[i][k]
+                right += self.text[i][k] + "  "
             else : 
                 break
             k += 1
@@ -141,7 +141,7 @@ class FindTextWithCoordinates:
             while (lineNum-1) !=  self.line_num[i][k]:
                 k += 1
             while k < firstLineIndex:
-                top += self.text[i][k]
+                top += self.text[i][k] +"  "
                 k += 1
             return top
         else :
@@ -160,20 +160,29 @@ class FindTextWithCoordinates:
                 while k != firstBlockIndex:
                     top += self.text[i][k]
                     k += 1
-                return top
+                return top + "  "
                 
     def findBottomText(self,i,j):
         [blockNum,lineNum,wordNum] = self.initFindText(i,j)
-        [firstBlockIndex , lastBlockIndex ] = self.firstAndLastIndex(i,blockNum,0,self.block_num)
-        [firstLineIndex,  lastLineIndex   ] = self.firstAndLastIndex(i,lineNum,firstBlockIndex,self.line_num)
-        [firstWordIndex,  lastWordIndex   ] = self.firstAndLastIndex(i,wordNum,firstLineIndex,self.word_num)
-        
+        [firstBlockIndex,lastBlockIndex,firstLineIndex,lastLineIndex ] = self.firstAndLastIndexes(i,j)
 
         size  = len(self.text[i])
-        if(size <= lastLineIndex+1):
+        
+        if(j+1 >= size):
             return ""
-        if(self.block_num[i][lineNum+1] == blockNum):
-            print(self.block_num[i][lastBlockIndex+1])
+        bottom = ""
+        if(blockNum+1 == self.block_num[i][lastLineIndex+1]):
+            k = lastBlockIndex+3
+            while self.line_num[i][k] == 1 and  k < size  :
+                bottom += self.text[i][k] + "  "
+                k += 1
+            return bottom;
+        else : 
+            k = lastLineIndex+2
+            while self.line_num[i][k] == lineNum + 1 and k < size:
+                bottom += self.text[i][k] +"  "
+                k += 1
+            return bottom
        
     def firstAndLastIndex(self,i,param,startIndex,data):
         size = len(data[i])
@@ -198,6 +207,9 @@ class FindTextWithCoordinates:
         lastBlockIndex = 0
         k = 0
         isFirstEntry = True
+
+        
+
         while k < size :
             if(self.block_num[i][k] == blockNum ):
                 if(isFirstEntry):
@@ -212,35 +224,21 @@ class FindTextWithCoordinates:
         firstLineIndex = 0
         lastLineIndex = 0
         isFirstEntry = True
+
         while k < size :
             if(self.line_num[i][k] == lineNum):
                 if(isFirstEntry):
                     firstLineIndex = k
                     isFirstEntry = False
                 lastLineIndex = k
-
+            if(size-1 == k ):
+                break
             if(self.data[i]['conf'][k+1] == -1 or self.line_num[i][k+1] == 0):
                 break
             k += 1
-
-            print("conf : ",self.data[i]['conf'][k])
-      
-
         k = firstLineIndex 
         while k < lastLineIndex:
-            print(self.text[i][k])
             k += 1
-
-        print("firstBlockIndex : ",firstBlockIndex)
-        print("lastBlockIndex : ",lastBlockIndex)
-        print("firstBlock Değeri : " , self.text[i][firstBlockIndex])
-        print("lastBlock Değeri : " , self.text[i][lastBlockIndex])
-        print("firstLineIndex : ",firstLineIndex)
-        print("lastLineIndex : ",lastLineIndex)
-
-        print("firstLine Değeri : " , self.text[i][firstLineIndex])
-        print("lastLine Değeri : " , self.text[i][lastLineIndex])
-
         return [firstBlockIndex,lastBlockIndex,firstLineIndex,lastLineIndex]
 
 
@@ -248,8 +246,9 @@ a = FindTextWithCoordinates()
 selectedItems = []
 
 selectedItems.append(["tamamlayarak",493,493+157,1332,1332+25])
-#selectedItems.append(["Mehmet Aytaç ÇINAR",1131,1131+117,1015,1015+23])
-#selectedItems.append([":http://fbe.kocaeli.edu.tr/",605,605+233,2247,2247+20])
-#selectedItems.append(["anlaşıldığından",806,806+174,1332,1332+25])
+selectedItems.append(["Mehmet",1131,1131+117,1015,1015+23])
+selectedItems.append(["Anabilim",1025,1025+132,1052,1052+24])
+selectedItems.append([":http://fbe.kocaeli.edu.tr/",605,605+233,2247,2247+20])
+selectedItems.append(["anlaşıldığından,",806,806+174,1332,1332+25])
 
 a.operations(selectedItems)
