@@ -117,8 +117,6 @@ class DocumentOperation:
             dict = {}
             dict.update (pytesseract.image_to_data(images[counter], output_type=Output.DICT,lang="tur"))
             data.append(dict)
-            print(pytesseract.image_to_data(images[counter],lang="tur"))
-            break
             counter += 1
         return data;
         

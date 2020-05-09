@@ -246,11 +246,6 @@ class FindTextWithCoordinates:
 a = FindTextWithCoordinates()
 selectedItems = []
 
-selectedItems.append(["tamamlayarak",493,493+157,1332,1332+25])
-selectedItems.append(["Mehmet",1131,1131+117,1015,1015+23])
-selectedItems.append(["Anabilim",1025,1025+132,1052,1052+24])
-selectedItems.append([":http://fbe.kocaeli.edu.tr/",605,605+233,2247,2247+20])
-selectedItems.append(["anlaşıldığından,",806,806+174,1332,1332+25])
-selectedItems.append(["Faks:490,",441,441+77,2221,2221+15])
+selectedItems.append(["Adi soyadi : ",270,432,440,472])
 
 a.operations(selectedItems)

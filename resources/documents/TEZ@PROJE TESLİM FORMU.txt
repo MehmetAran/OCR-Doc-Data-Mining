@@ -1,4 +1,1 @@
-No;Anabilim Dalı;Öğrenci No;Yarıyılı;Ad Soyadı;!
-Ad-Soyad;Öğrenci No;Adı Soyadı;Tarih;E-posta;!
-E posta adresi;Adı Soyadı : Tarih : ;E-posta ;İmza;Adres;!
-Tez Proje Adı;Tez / Proje Adı;;;Fen Bilimleri Enstitüsü Onayı;
+Ad,Soyad;ÖğrenciNo:175163010Yarıyılı:Güz()/Bahar();AdıSoyadı;Tarih24.8.8/2019;E-posta:barishurgenc©gmail.comİmza;1

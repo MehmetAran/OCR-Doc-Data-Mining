@@ -9,7 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from docOkut import Ui_MainWindow
-from DocumentOperation import DocumentOperation 
+from DocumentOperations2 import DocumentOperation 
 import os
 class Ui_DDVT(object):
 

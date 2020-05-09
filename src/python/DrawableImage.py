@@ -85,4 +85,4 @@ class DrawableImage:
             
 
 a  = DrawableImage()
-a.run("C:\\Users\\warri\\Desktop\\computerscience\\OCR-Doc-Data-Mining\\resources\\images\\tarama1_0.jpg")
+a.run("C:\\Users\\warri\\Desktop\\computerscience\\OCR-Doc-Data-Mining\\resources\\images\\tarama1_1.jpg")
