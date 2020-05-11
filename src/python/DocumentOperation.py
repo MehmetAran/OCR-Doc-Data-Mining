@@ -67,6 +67,7 @@ class DocumentOperation:
 
 
         parsingData = []
+        parsingData.clear()
         for targetStringLeft,targetStringRight,targetStringTop,targetStringBottom ,targetStringIsSingle in zip(targetStringsLeft,targetStringsRight,targetStringsTop,targetStringsBottom,targetStringsIsSingle):
             firstIndex = 0
             lastIndex  = 0
@@ -113,6 +114,7 @@ class DocumentOperation:
         size = len(images)
         counter = 0
         data = []
+        data.clear()
         while counter < size:
             dict = {}
             dict.update (pytesseract.image_to_data(images[counter], output_type=Output.DICT,lang="tur"))

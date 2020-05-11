@@ -1,15 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'anasayfa.ui'
-#
-# Created by: PyQt5 UI code generator 5.14.1
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from docOkut import Ui_MainWindow
 from DocumentOperations2 import DocumentOperation 
+from AddDocument import AddDocumentToSqlite
 import os
 class Ui_DDVT(object):
 
@@ -18,10 +12,8 @@ class Ui_DDVT(object):
         docOpr.readDoc()
 
     def openWindow(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        a = AddDocumentToSqlite()
+        a.start()
 
 
     def setupUi(self, DDVT):

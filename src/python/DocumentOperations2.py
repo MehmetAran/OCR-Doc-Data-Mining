@@ -9,9 +9,13 @@ import os
 from pytesseract import Output
 import numpy
 import os
+from sqliteOperations import SqliteOperations
+import locale
 
 class DocumentOperation:
-    
+    def __init__(self):
+        locale.setlocale(locale.LC_ALL, 'tr_TR.utf8')
+
     def readDoc(self):
 
         Tk().withdraw()
@@ -23,9 +27,12 @@ class DocumentOperation:
 
         size = len(images)
         imageDataTexts = []
+        imageDataTexts.clear()
         imageDataText = ""
         pureImageDataTexts = []
+        pureImageDataTexts.clear()
         counter = 0 
+        replacedText = ""
         while counter < size:
             #image = cv2.imread(images[counter])
             #gray = imgp.get_grayscale(image)
@@ -36,42 +43,47 @@ class DocumentOperation:
             imageDataText += text
             pureImageDataTexts.append(text)
             text = text.replace('\n','').replace(' ','').replace('\t','')
+            replacedText += text
             imageDataTexts.append(text)
             counter += 1
         
-        documents = ffo.all_files_in_folder(basepath+'/resources/documents')
-        documents = ffo.all_files_in_folder(basepath+'/resources/documents')
+        documents = SqliteOperations().getAll()
         validDocument = ""
         formIndex = 0
         for document in documents:
-            operation_document = document.replace("@","/")
-            operation_document = operation_document.replace(basepath+"/resources/documents\\","")
-            operation_document = operation_document.replace(".txt","")
-            operation_document = operation_document.strip()
-            if imageDataText.find(operation_document) != -1 :
+            operation_document = document[1].replace("\n","").replace("\t","").replace(" ","")
+            if replacedText.find(operation_document) != -1 :
                 validDocument = document
+                break
         targetStringsLeft = []
+        targetStringsLeft.clear()
         targetStringsRight = []
+        targetStringsRight.clear()
         targetStringsName = []
+        targetStringsName.clear()
         targetStringsTop = []
+        targetStringsTop.clear()
         targetStringsBottom = []
+        targetStringsBottom.clear()
         pageNums = []
-        targetStrings =  ffo.returnStringReadFile(validDocument)
+        pageNums.clear()
+        targetStrings =  SqliteOperations().findByDocumentName(validDocument[1])
         counter = 0
 
-        while  counter < len(targetStrings):
-            targetStringsName.append(targetStrings[counter].split(";")[0])
-            targetStringsTop.append(targetStrings[counter].split(";")[1])
-            targetStringsLeft.append(targetStrings[counter].split(";")[2])
-            targetStringsRight.append(targetStrings[counter].split(";")[3])
-            targetStringsBottom.append( targetStrings[counter].split(";")[4]) 
-            pageNums.append( (int)(targetStrings[counter].split(";")[5])) 
+        for  ts  in targetStrings:
+            pageNums.append( (int)(ts[2])) 
+            targetStringsName.append(ts[3])
+            targetStringsTop.append(ts[6])
+            targetStringsLeft.append(ts[4])
+            targetStringsRight.append(ts[5])
+            targetStringsBottom.append( ts[7]) 
 
 
             counter += 1
         
 
         parsingData = []
+        parsingData.clear()
         targetStringLeft = ""
         targetStringRight = ""
         targetStringTop = ""
@@ -84,11 +96,7 @@ class DocumentOperation:
             targetStringLeft = targetStringLeft.replace('\n','').replace('\t','').replace(' ','')
             targetStringRight = targetStringRight.replace('\n','').replace('\t','').replace(' ','')
 
-            print("top değeri döndü",targetStringTop)
-            print("bottom değeri döndü",targetStringBottom)
-            print("left değeri döndü",targetStringLeft)
-            print("right değeri döndü",targetStringRight)
-            
+
             firstIndex = 0
             lastIndex = len(imageDataTexts[pageNum])
 
@@ -110,15 +118,11 @@ class DocumentOperation:
                 lastIndex = temp + firstIndex
 
 
-            lastParsedData = imageDataTexts[pageNum][firstIndex+1:lastIndex]
-            print(lastParsedData)
+            lastParsedData = imageDataTexts[pageNum][firstIndex:lastIndex]
             
-            size = len(pureImageDataTexts[pageNum]) #enter , space vs 
-            size2 = len(lastParsedData)  #bariscilkez
-            print("lastParsedData",lastParsedData)
+            size = len(pureImageDataTexts[pageNum]) 
+            size2 = len(lastParsedData)  
             last,first = 0,0
-            print("size : ",size)
-            print("size2 : ",size2)
             i = 0
             while i < size :
                 j = 0
@@ -134,7 +138,7 @@ class DocumentOperation:
                             first = i
                         i += 1
                         j += 1
-                        continue    
+                            
                     else :
                         break
                     
@@ -142,9 +146,17 @@ class DocumentOperation:
                     last = i 
                     break
                 i += 1
-
+            result = pureImageDataTexts[pageNum][first:last]
+            parsingData.append(result)
+            print(result)
+            print("pureImageDataTexts[first] : ",pureImageDataTexts[pageNum][first])
             print("first : ",first)
             print("last : ",last)
-            print("sonuç",pureImageDataTexts[pageNum][first:last])
 
 
+    def getAllDataFromImage(self,imagePath):
+        dict = {}
+        data = []
+        dict.update (pytesseract.image_to_data(imagePath, output_type=Output.DICT,lang="tur"))
+        data.append(dict)
+        return data

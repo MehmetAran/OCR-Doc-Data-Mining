@@ -1,4 +1,5 @@
-from DocumentOperation import DocumentOperation
+from DocumentOperations2 import DocumentOperation
+import os
 
 ''' 
         index       data
@@ -39,18 +40,20 @@ class FindTextWithCoordinates:
     bottomText = "" 
     selectedItems = None
     foundedTexts = []
+    imagePath = ""
     def __init__(self): 
-        self.data = self.doc.getAllDataFromPDF()
-        for d in self.data:
-            self.left.append(d['left'])
-            self.width.append(d['width'])
-            self.top.append(d['top'])
-            self.height.append(d['height'])
-            self.text.append(d['text'])
-            self.block_num.append(d['block_num'])
-            self.word_num.append(d['word_num'])
-            self.line_num.append(d['line_num'])
-    def operations(self,selectedItems):
+        pass
+    def operations(self,selectedItems,imagePath):
+        self.imagePath = imagePath
+        self.data = self.doc.getAllDataFromImage(imagePath)
+        self.left.append(self.data[0]['left'])
+        self.width.append(self.data[0]['width'])
+        self.top.append(self.data[0]['top'])
+        self.height.append(self.data[0]['height'])
+        self.text.append(self.data[0]['text'])
+        self.block_num.append(self.data[0]['block_num'])
+        self.word_num.append(self.data[0]['word_num'])
+        self.line_num.append(self.data[0]['line_num'])
         self.selectedItems = selectedItems
         for one in self.selectedItems:
             isFirstEntry = True
@@ -61,7 +64,8 @@ class FindTextWithCoordinates:
                     if(self.isExist(i,j)):
                         self.firstAndLastIndexes(i,j)
                         if(isFirstEntry):
-                            self.leftText = self.findLeftText(i,j)
+                            self.leftText = self.findLeft2(i,j)
+                            #self.leftText = self.findLeft2(i,j)
                             self.topText = self.findTopText(i,j)
                             self.foundedTexts.append([])
                             isFirstEntry = False
@@ -69,8 +73,8 @@ class FindTextWithCoordinates:
                         self.bottomText = self.findBottomText(i,j)
                         self.foundedTexts[self.counter] = [self.leftText , self.rightText,self.topText,self.bottomText]
             self.counter += 1    
-        for item in self.foundedTexts:
-            print(item)       
+        return self.foundedTexts     
+
 
 
     def isExist(self,i,j):
@@ -201,6 +205,15 @@ class FindTextWithCoordinates:
         return [(firstParam ),(lastParam )] 
 
 
+    def findLeft2(self,i,j):
+        [firstBlockIndex,lastBlockIndex,firstLineIndex,lastLineIndex ] = self.firstAndLastIndexes(i,j)
+        left = ""
+        k = firstLineIndex
+        while k < j:
+            left += self.text[i][k] 
+            k += 1
+        return left;
+
     def firstAndLastIndexes(self,i,j):
         [blockNum,lineNum,wordNum] = self.initFindText(i,j)
         size =len(self.block_num[i])
@@ -234,7 +247,7 @@ class FindTextWithCoordinates:
                 lastLineIndex = k
             if(size-1 == k ):
                 break
-            if(self.data[i]['conf'][k+1] == -1 or self.line_num[i][k+1] == 0):
+            if(size <= k+1 and self.data[i]['conf'][k] == -1 or self.line_num[i][k+1] == 0):
                 break
             k += 1
         k = firstLineIndex 
@@ -242,10 +255,16 @@ class FindTextWithCoordinates:
             k += 1
         return [firstBlockIndex,lastBlockIndex,firstLineIndex,lastLineIndex]
 
+"""
+basepath = os.path.abspath(".")
 
 a = FindTextWithCoordinates()
 selectedItems = []
 
-selectedItems.append(["Adi soyadi : ",270,432,440,472])
+selectedItems.append(["anabilim dalı: ",264,561,345,380]) # x1 , x2 , y1, y2 left'i kontrol et
+selectedItems.append(["isim,soyisim",270,434,440,472])                                                         
 
-a.operations(selectedItems)
+a.operations(selectedItems,basepath + "/resources/images/tarama1_1.jpg")
+
+
+"""

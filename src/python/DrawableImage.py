@@ -1,7 +1,9 @@
 import cv2 
 import sys
 import os
-import MyInputBox
+import time
+from functools import partial  
+from tkinter  import *
 class DrawableImage:
     ref_point = [] 
     crop = False
@@ -13,7 +15,10 @@ class DrawableImage:
     width = 0
     height = 0
     image = None
-    clone = None
+    clones = []
+    selectedItems = []
+    inputs = []
+    pageNum = 0
     def __init__(self):
         pass
 
@@ -22,16 +27,15 @@ class DrawableImage:
             self.ref_point = [(x, y)] 
         elif event == cv2.EVENT_LBUTTONUP:
             self.ref_point.append((int(x), int(y))) 
+            self.clones.append(self.image.copy())
             cv2.rectangle(self.image, self.ref_point[0], self.ref_point[1], (0, 255, 0), 2)
-            cv2.imshow("image", self.image) 
             self.size += 1
-    def copyImage(self,ref_point):
-        #MyInputBox.executor()
 
+    def copyImage(self,ref_point):
         self.tess_point[0] = (int(self.scalaWidth * ref_point[0][0]) ,int(self.scalaHeight * ref_point[0][1]));
         self.tess_point[1] = ( int(self.scalaWidth * ref_point[1][0]),int(self.scalaHeight * ref_point[1][1]));
-        crop_img = self.clone[ref_point[0][1]:ref_point[1][1], ref_point[0][0]: 
-                                                               ref_point[1][0]]
+        crop_img = self.clone[self.tess_point[0][1]:self.tess_point[1][1], self.tess_point[0][0]: 
+                                                               self.tess_point[1][0]]
         
         cv2.imshow("crop_img", crop_img)
         print(self.tess_point)
@@ -46,7 +50,10 @@ class DrawableImage:
             else:
                 break;
         print("scalawidth : " , self.scalaWidth," scalaheight : ",self.scalaHeight)
-    def run(self,imagePath):
+
+    def run(self,imagePath,pageNum):
+        self.clones.clear()
+        self.pageNum = pageNum
         self.image = cv2.imread(imagePath)
         self.clone = self.image.copy() 
         cv2.namedWindow("image") 
@@ -54,8 +61,9 @@ class DrawableImage:
         self.width = (self.image.shape[1] )
         self.height = (self.image.shape[0])
         self.resize();
-        while True: 
-            dsize = (int(self.width/self.scalaWidth), int(self.height/self.scalaHeight))
+        dsize = (int(self.width/self.scalaWidth), int(self.height/self.scalaHeight))
+
+        while True:
             self.image = cv2.resize(self.image,dsize)
             cv2.imshow("image", self.image) 
             key = cv2.waitKey(1) & 0xFF
@@ -64,25 +72,54 @@ class DrawableImage:
                 cv2.destroyAllWindows() 
                 break; 
             elif key == 27:
+
                 self.size -= 1;
-                self.image = self.clone.copy()
+                self.image = self.clones[self.size].copy()
+                self.clones.pop()
+
             if key == 0x0D:
                 drawed = True;
                 draw = True;
                 if len(self.ref_point) == 2: 
-                   self.copyImage(self.ref_point)
-            if len(self.ref_point) == 2 and draw: 
-                draw == False;
-                self.ref_point[0] = (int(self.scalaWidth * self.ref_point[0][0]) ,int(self.scalaHeight * self.ref_point[0][1]));
-                self.ref_point[1] = ( int(self.scalaWidth * self.ref_point[1][0]),int(self.scalaHeight * self.ref_point[1][1]));
-                crop_img = self.clone[self.ref_point[0][1]:self.ref_point[1][1], self.ref_point[0][0]: 
-                                                                   self.ref_point[1][0]]
-                cv2.imshow("crop_img", crop_img)
-            
+                    self.copyImage(self.ref_point)
+                    self.takeInput(self.tess_point)
             if cv2.getWindowProperty('image',1) == -1 :
-                break
+                return self.selectedItems
+                
 
             
+    def takeInput(self,inputs):
+        window = Tk()
 
-a  = DrawableImage()
-a.run("C:\\Users\\warri\\Desktop\\computerscience\\OCR-Doc-Data-Mining\\resources\\images\\tarama1_1.jpg")
+        window.title("Welcome to LikeGeeks app")
+
+        window.geometry('350x200')
+
+        lbl = Label(window, text="isim")
+
+        lbl.grid(column=0, row=0)
+
+        txt = Entry(window,width=10)
+
+        txt.grid(column=1, row=0)
+
+        def clicked():
+            res =txt.get()
+            self.selectedItems.append([self.pageNum,res,inputs[0][0],inputs[1][0],inputs[0][1],inputs[1][1]])
+            print("************************ Veriler ********************** ")
+            for input in self.selectedItems:
+                print(input)
+            window.destroy()
+            window.quit()
+
+        btn = Button(window, text="Click Me", command=clicked)
+
+        btn.grid(column=2, row=0)
+
+        window.mainloop()
+
+#a  = DrawableImage()
+#a.run("C:\\Users\\warri\\Desktop\\computerscience\\OCR-Doc-Data-Mining\\resources\\images\\tarama1_1.jpg")
+# x1,y1 ,x2,y2,
+# sayfa numarası(0'dan başla) , index adı , x1,x2,y1,y2 olacak şekilde
+#self.inputs.append([num1,inputs[0][0],inputs[1][0],inputs[0][1],inputs[1][1]])
