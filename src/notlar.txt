@@ -1,5 +1,2 @@
-1. Sqlite'a veri eklenecek 
-2. Bazen hatalı sonuçlar çıkıyor onlarla ilgili findTextCoordinates içinde çalışma yapılacak
-3. ESC'ye basarken önceki resmi gösteriyor , onu düzelt
-
-
+1. Sol metin bulmada sorun var 
+2. 

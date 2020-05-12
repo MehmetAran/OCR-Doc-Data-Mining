@@ -90,34 +90,41 @@ class DocumentOperation:
         targetStringBottom = ""
         imageDataText = imageDataText.replace('\n',"").replace('\t',"").replace(' ','')
 
-        for targetStringLeft,targetStringRight,targetStringTop,targetStringBottom,pageNum  in zip(targetStringsLeft,targetStringsRight,targetStringsTop,targetStringsBottom,pageNums):
+        for targetStringName,targetStringLeft,targetStringRight,targetStringTop,targetStringBottom,pageNum , in zip(targetStringsName,targetStringsLeft,targetStringsRight,targetStringsTop,targetStringsBottom,pageNums):
             targetStringTop = targetStringTop.replace('\n','').replace('\t','').replace(' ','')
             targetStringBottom = targetStringBottom.replace('\n','').replace('\t','').replace(' ','')
             targetStringLeft = targetStringLeft.replace('\n','').replace('\t','').replace(' ','')
             targetStringRight = targetStringRight.replace('\n','').replace('\t','').replace(' ','')
-
+            #print(imageDataTexts[pageNum])
 
             firstIndex = 0
             lastIndex = len(imageDataTexts[pageNum])
 
             temp = imageDataTexts[pageNum].find(targetStringTop)
-            if(temp != -1):
+            if(temp != -1 and targetStringTop !=""):
                 firstIndex = temp + len(targetStringTop)
+                #print("üst var",firstIndex)
 
             temp = imageDataTexts[pageNum][firstIndex:].find(targetStringLeft)
-            if(temp != -1):
+            if(temp != -1 and targetStringLeft != "") :
                 firstIndex += temp + len(targetStringLeft)
+                #print("sol var",firstIndex)
 
+            #print(imageDataTexts[pageNum][firstIndex:])
+            print("targetStringBottom : ",targetStringBottom)
             temp = imageDataTexts[pageNum][firstIndex:].find(targetStringBottom)
-            if(temp != -1):
+            #print("alt temp : ",temp," targetStringBottom : ",targetStringBottom)
+            if(temp != -1 and targetStringBottom !=""):
                 lastIndex = temp + firstIndex
+                print("alt var",lastIndex)
 
             temp = imageDataTexts[pageNum][firstIndex:lastIndex].find(targetStringRight)
-
-            if(temp != -1):
+            if(temp != -1 and targetStringRight != ""):
+                #print("sağ var",lastIndex)
                 lastIndex = temp + firstIndex
 
-
+            #print(targetStringName ,"için ")
+            #print("first : ",firstIndex ,"last : ",lastIndex)
             lastParsedData = imageDataTexts[pageNum][firstIndex:lastIndex]
             
             size = len(pureImageDataTexts[pageNum]) 
@@ -147,16 +154,15 @@ class DocumentOperation:
                     break
                 i += 1
             result = pureImageDataTexts[pageNum][first:last]
-            parsingData.append(result)
-            print(result)
-            print("pureImageDataTexts[first] : ",pureImageDataTexts[pageNum][first])
-            print("first : ",first)
-            print("last : ",last)
+            parsingData.append([targetStringName,result])
+        print(parsingData)
+        return parsingData
 
 
     def getAllDataFromImage(self,imagePath):
         dict = {}
         data = []
+        data.clear()
         dict.update (pytesseract.image_to_data(imagePath, output_type=Output.DICT,lang="tur"))
         data.append(dict)
         return data

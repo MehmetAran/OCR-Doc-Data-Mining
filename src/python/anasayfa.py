@@ -5,11 +5,17 @@ from docOkut import Ui_MainWindow
 from DocumentOperations2 import DocumentOperation 
 from AddDocument import AddDocumentToSqlite
 import os
+import printer
 class Ui_DDVT(object):
 
     def readDoc(self):
         docOpr =DocumentOperation()
-        docOpr.readDoc()
+        results = docOpr.readDoc()
+        basePath = os.path.abspath('.')
+        for result in results:
+            path = basePath + "/resources/txt-docs/test.txt"
+            susbt = result[0] +" "+ result[1]
+            printer.replaceText(path,result[0],susbt)
 
     def openWindow(self):
         a = AddDocumentToSqlite()
