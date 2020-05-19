@@ -4,6 +4,10 @@ from PyQt5.QtGui import QPainter
 from PyQt5.QtCore import Qt
 import os
 from DocumentOperations import DocumentOperation 
+import printer
+from sqliteOperations import SqliteOperations
+from shutil import copyfile
+import datetime
 
 class bookIn(QWidget):
     '''
@@ -118,28 +122,55 @@ class multiBookIn(QWidget):
         # self.multiBookIn_layout.addWidget(self.label, 9, 4, 2, 2)
 
     def readDoc(self):
-        '''
-        Dosyayı açın ve metin kutusunda görüntüleyin
-        '''
+       
         fname = QFileDialog.getOpenFileName(
             self, 'Belge okut', './', 'Pdf(*.pdf)')
         filePath = fname[0]
-        if(filePath != ""):
+
+        folder = QFileDialog.getExistingDirectory(
+            self, 'Hedef Klasör Seç', './', QFileDialog.ShowDirsOnly
+                                                | QFileDialog.DontResolveSymlinks)
+
+        print("folderPath : ",folder)
+
+        if(folder != ""):
             docOpr =DocumentOperation()
             results = docOpr.readDoc(filePath)
             basePath = os.path.abspath('.')
             for result in results:
                 print("*******************************")
+                # Belge isminden TargetDocuments  tablosuna istek atılacak
+                #Eğer eşleşen varsa o dosyayı printer ile yazdıracak
+                targetDocument = ""
+                try :
+                    targetDocumentInformations = SqliteOperations().findByDocumentNameFromTargetDocuments(result[0][0])
+                    targetDocument = targetDocumentInformations[2]
+                    print(targetDocument)
+                except:
+                    QMessageBox.information(self, 'hata ','hata ', QMessageBox.Ok)
+                    break
+                self.copy(basePath+'/resource/txt-docs/'+targetDocument,folder)
                 print("Belge ismi : " , result[0][0])
                 for r in result : 
                     print(r[1] ," : ", r[2])
-            """     path = basePath + "/resource/txt-docs/" + r[0]
-                    susbt = result[1] +" "+ result[2]
-                    #printer.replaceText(path,result[0],susbt)"""
+                    path = folder+'/' + targetDocument
+                    pattern = "@@"+ r[1]
+                    subst = r[2]
+                    printer.replaceText(path,pattern,subst)
+                path = folder+'/' + targetDocument
+                now = str(datetime.datetime.now().strftime("%Y%m%d %H:%M:%S.%f")).replace(' ','').replace(':','')
+                newPath = folder +'/'+now+'.txt'
+                os.rename(path,newPath)
+                print(newPath)
+        QMessageBox.information(self, 'İşlem bitti',' işlem bitti', QMessageBox.Ok)
 
 
-    def submit(self):
-        print("bosss")
+    def copy(self,src, dst):
+        if os.path.isdir(dst):
+            dst = os.path.join(dst.encode('utf-8'), os.path.basename(src).encode('utf-8'))
+            copyfile(src,dst)
+
+
 
     def paintEvent(self, event):
         '''

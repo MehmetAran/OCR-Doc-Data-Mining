@@ -46,6 +46,7 @@ class Main(QMainWindow):
         
         self.main_layout.addWidget(self.left_widget, 0, 0, 1, 1)
         self.main_layout.addWidget(self.right_widget, 0, 1, 1, 6)
+
         self.main_layout.addWidget(self.bookIn_widget, 0, 1, 1, 6)
         # self.main_layout.addWidget(self.singleBookIn_widget, 0, 1, 1, 6)
         self.main_layout.addWidget(self.multiBookIn_widget, 0, 1, 1, 6)
@@ -117,50 +118,35 @@ class Main(QMainWindow):
         self.right_layout.addWidget(self.noneLabel1_2, 5, 0, 2, 4)
 
     def bookIn_view(self):
-        '''
-        Kitap depolama: sayfa seçimi: tekli depolama veya toplu depolama
-        '''
         
-        # Kitap saklama kılavuzu sayfası oluşturma
         self.bookIn_widget = bookIn()
         self.bookIn_widget.setObjectName('bookIn_widget')
-        # Anahtar arabiriminin düğmesini atlama işlevine bağlayın
         self.bookIn_widget.returnMain_button.clicked.connect(
             self.return_mainView)
         
         self.bookIn_widget.btnDocNameEkle.clicked.connect(self.btnDocNameEkle)
 
-        # Bu düğmeyle tek kitap depolama alanına geçiş arayüzünü bağlayın
         self.bookIn_widget.bookIn_single.clicked.connect(
             self.addDocument)
 
-        # Bu düğme ile çoklu kitap depolamaya geçmek için arayüzü bağlayın
         self.bookIn_widget.bookIn_multi.clicked.connect(
             self.into_MultiBookInView)
 
-        # Çok kitaplı depolama sayfası oluşturma
         self.multiBookIn_widget = multiBookIn()
         self.multiBookIn_widget.setObjectName('multiBookIn_widget')
         self.multiBookIn_widget.return_button.clicked.connect(
             self.into_BookInView)
         
-        # Başlangıç ​​durumu: gizli
         self.multiBookIn_widget.hide()
         self.bookIn_widget.hide()
 
     def borrow_view(self):
-        '''
-        Borçlanma arayüzü
-        '''
         self.bookBorrow_widget = bookBorrow()
         self.bookBorrow_widget.setObjectName('bookBorrow_widget')
         self.bookBorrow_widget.returnMain_button.clicked.connect(self.return_mainView)
         self.bookBorrow_widget.hide()
 
     def return_view(self):
-        '''
-        Kitap İade Arayüzü
-        '''
         self.bookReturn_widget = bookReturn()
         self.bookReturn_widget.setObjectName('bookReturn_widget')
         self.bookReturn_widget.returnMain_button.clicked.connect(self.return_mainView)

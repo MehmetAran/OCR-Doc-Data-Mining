@@ -11,6 +11,7 @@ import numpy
 import os
 from sqliteOperations import SqliteOperations
 import locale
+from PyQt5.QtWidgets import QWidget, QApplication,QStyleOption, QStyle, QWidget, QLabel, QPushButton, QLineEdit, QTableView, QGridLayout, QFileDialog, QMessageBox, QTableWidget, QFrame, QTableWidgetItem
 
 
 ''' 
@@ -49,4 +50,6 @@ def printData():
 index = text.find("Mimarlık")
 print("index : ",index)
 """
-printData()
+
+
+

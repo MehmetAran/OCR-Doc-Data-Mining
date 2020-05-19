@@ -48,11 +48,15 @@ class SearchDialog(QDialog):
 
     def selectedIndexDelete(self):
         row = self.tableWidget.currentRow()
+        if(row == ""):
+            return
         self.tableWidget.removeRow(row)
 
 
     def selectedIndexAddToSqlite(self):
         row = self.tableWidget.currentRow()
+        if(row == ""):
+            return
         index0 = self.tableWidget.item(row,0).text()
         index1 = self.tableWidget.item(row,1).text()
         index2 = self.tableWidget.item(row,2).text()

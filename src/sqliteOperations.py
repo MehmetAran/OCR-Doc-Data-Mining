@@ -9,8 +9,6 @@ class SqliteOperations:
         self.conn = sqlite3.connect(self.basePath + '/resource/db/sql.db')
 
     def insert(self,documentName,pageNumber,indexName,leftText,rightText,topText,bottomText):
-        print("veritabanı kısmı")
-        print(documentName,pageNumber,indexName,leftText,rightText,topText,bottomText)
         c = self.conn.cursor()
         c.execute("INSERT INTO Documents(documentName,pageNumber,indexName,leftText,rightText,topText,bottomText) VALUES (?,?,?,?,?,?,?)",
         (documentName,pageNumber,indexName,leftText,rightText,topText,bottomText))
@@ -50,6 +48,27 @@ class SqliteOperations:
         documentIndexes =      documents = c.fetchall()
         self.conn.commit()
         return documentIndexes
+
+    def findByDocumentNameFromTargetDocuments(self,documentName):
+        print(documentName)
+        c = self.conn.cursor()
+        c.execute("select * from TargetDocuments where documentName=?",(documentName,))
+        document = c.fetchone()
+        self.conn.commit()
+        return document
+
+    def insertTargetDocument(self,documentName,targetDocument):
+        print(documentName,",",targetDocument)
+        c = self.conn.cursor()
+        c.execute("INSERT INTO TargetDocuments(documentName,targetDocument) VALUES (?,?)",
+        (documentName,targetDocument))
+        self.conn.commit()
+
+"""
+
+a = SqliteOperations().findByDocumentNameFromTargetDocuments("YÜKSEK LİSANS TEZ KONUSU BİLDİRİM FORMU")
+
+print(a)"""
 """
 a = SqliteOperations()
 a.insert("mehmet",1,"deneme1","deneme2","deneme3","deneme4","deneme5")

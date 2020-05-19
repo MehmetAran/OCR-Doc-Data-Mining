@@ -38,6 +38,8 @@ def all_files_in_folder(folderpath):
 
     return files
 
+    
+    
 
 def long_slice(image_path, out_name, outdir, slice_size):
     base=os.path.basename(image_path)
