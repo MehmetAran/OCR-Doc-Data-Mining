@@ -18,7 +18,17 @@ class SqliteOperations:
         c = self.conn.cursor()       
         c.execute("DELETE from Documents where id =?",(id,))
         self.conn.commit()
+    def deleteFromTargetDocuments(self,id):
+        c = self.conn.cursor()       
+        c.execute("DELETE from TargetDocuments where id =?",(id,))
+        self.conn.commit()
 
+    
+    def updateFromTargetDocuments(self,id,documentName,targetDocument):
+        c = self.conn.cursor()        
+        c.execute("UPDATE  TargetDocuments SET documentName=?,targetDocument=? where id = ?",
+        (documentName,targetDocument,id))
+        self.conn.commit()
 
     def update(self,id,documentName,pageNumber,indexName,leftText,rightText,topText,bottomText):
         c = self.conn.cursor()        
