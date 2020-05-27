@@ -70,14 +70,14 @@ class leftNavigation(QWidget):
         Sol kitap çalıştırma düğmesi
         '''
         
-        self.left_button2 = QPushButton('buton 1')
+        self.left_button2 = QPushButton('Dokümanlar')
         self.left_button2.setObjectName('left_button')
         self.left_button2.setIcon(QtGui.QIcon('./img/bookborrow.png'))
-        self.left_button3 = QPushButton('buton 2')
+        self.left_button3 = QPushButton('Doküman Eşleştirme')
         self.left_button3.setObjectName('left_button')
         self.left_button3.setIcon(QtGui.QIcon('./img/bookreturn.png'))
 
-        self.left_button4 = QPushButton('Dokuman Tanıt')
+        self.left_button4 = QPushButton('Doküman Tanıt')
         self.left_button4.setObjectName('left_button')
         self.left_button4.setIcon(QtGui.QIcon('./img/bookin.png'))
 

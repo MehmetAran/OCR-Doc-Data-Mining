@@ -14,7 +14,7 @@ class bookBorrow(QWidget):
         self.bookBorrow_layout = QGridLayout()
         self.setLayout(self.bookBorrow_layout)
 
-        self.returnMain_button = QPushButton('Ana sayfaya dön')
+        self.returnMain_button = QPushButton('Anasayfaya dön')
         self.bookBorrow_layout.addWidget(self.returnMain_button, 0, 0, 1, 8)
 
        
@@ -39,13 +39,14 @@ class bookBorrow(QWidget):
         self.getSelectedDocumentsBtn.clicked.connect(self.addNewDocumentToSQLiteAndRefreshTable)
 
         self.getSelectedDocumentsBtn = QPushButton('Sil')
-        self.bookBorrow_layout.addWidget(self.getSelectedDocumentsBtn, 5, 2, 3, 2)
+        self.bookBorrow_layout.addWidget(self.getSelectedDocumentsBtn, 5, 4, 2, 1)
         self.getSelectedDocumentsBtn.setObjectName('bookBorrow_button')
         self.getSelectedDocumentsBtn.clicked.connect(self.deleteAtIndexSQLiteAndTable)
 
         
         self.textForSearch = QLineEdit()
-        self.bookBorrow_layout.addWidget(self.textForSearch, 3, 3, 1, 2)
+        self.textForSearch.setPlaceholderText('Doküman ismi')
+        self.bookBorrow_layout.addWidget(self.textForSearch, 3, 3, 1, 3)
         self.textForSearch.setObjectName('bookBorrow_edit')
 
         self.getSelectedDocumentsWithSelectedTextBtn = QPushButton('Ara')

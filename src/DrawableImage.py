@@ -91,7 +91,7 @@ class DrawableImage:
     def takeInput(self,inputs):
         window = Tk()
 
-        window.title("Welcome to LikeGeeks app")
+        window.title("Dokümanın Adı")
 
         window.geometry('350x200')
 

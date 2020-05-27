@@ -25,7 +25,7 @@ class bookIn(QWidget):
         self.returnMain_button = QPushButton()  #  Arayüz atlama için bir tane ekleyin
         self.returnMain_button.setText('Ana sayfaya dön')
         self.bookIn_layout.addWidget(self.returnMain_button, 0, 0, 1, 7)
-
+        """"
         self.book_number_label = QLabel('Dokuman Adı')
         self.bookIn_layout.addWidget(self.book_number_label, 2, 1, 1, 1)
         self.book_number_label.setObjectName('lblDokumanAdı')
@@ -35,7 +35,7 @@ class bookIn(QWidget):
 
         self.btnDocNameEkle = QPushButton()
         self.btnDocNameEkle.setText('Ekle')
-        self.bookIn_layout.addWidget(self.btnDocNameEkle, 2, 5, 1, 1)
+        self.bookIn_layout.addWidget(self.btnDocNameEkle, 2, 5, 1, 1)"""
 
         # Tekil depolama
         self.bookIn_single = QToolButton()

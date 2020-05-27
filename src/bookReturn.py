@@ -12,10 +12,10 @@ class bookReturn(QWidget):
         self.bookReturn_layout = QGridLayout()
         self.setLayout(self.bookReturn_layout)
 
-        self.returnMain_button = QPushButton('ana arayüze geri dön')
+        self.returnMain_button = QPushButton('Anasayfaya dön')
         self.bookReturn_layout.addWidget(self.returnMain_button, 0, 0, 1, 6)
 
-        self.documentNameLabel = QLabel('Eşlenecek Belgenin Adı')
+        self.documentNameLabel = QLabel('Eşleşecek Belgenin Adı')
         self.bookReturn_layout.addWidget(self.documentNameLabel, 2, 1, 1, 1)
         self.documentNameLabel.setObjectName('bookReturn_label')
         
@@ -25,29 +25,28 @@ class bookReturn(QWidget):
      
 
         self.addToSqlBtn = QPushButton('Ekle')
-        self.bookReturn_layout.addWidget(self.addToSqlBtn, 4, 2, 1, 3)
+        self.bookReturn_layout.addWidget(self.addToSqlBtn, 4, 2, 1, 2)
         self.addToSqlBtn.setObjectName('bookReturn_button')
         self.addToSqlBtn.clicked.connect(self.addTargetDocumentToSqlite)
 
         self.selectDocumentPath = QPushButton('Döküman Seç')
-        self.bookReturn_layout.addWidget(self.selectDocumentPath, 4, 2, 1, 2)
+        self.bookReturn_layout.addWidget(self.selectDocumentPath, 4, 4, 1, 2)
         self.selectDocumentPath.setObjectName('bookReturn_button')
         self.selectDocumentPath.clicked.connect(self.chooseFile)
 
 
         
 
-        self.record_label = QLabel('Şu anda ödünç alınan kitaplar:')
+        self.record_label = QLabel('')
         self.bookReturn_layout.addWidget(self.record_label, 5, 2, 1, 2)
         self.record_label.setObjectName('bookBorrow_already')
 
-
-        self.label = QLabel('Kitapları iade et')
+        """
+        self.label = QLabel('')
         self.label.setObjectName('bookReturn_title')
-        self.bookReturn_layout.addWidget(self.label, 10, 4, 2, 2)
+        self.bookReturn_layout.addWidget(self.label, 10, 4, 2, 2)"""
 
     def addTargetDocumentToSqlite(self):
-        print("girdi")
         if(self.fname == ""):
             return
         if(self.documentNameText.text() == ""):
@@ -72,3 +71,8 @@ class bookReturn(QWidget):
         dirname = os.path.dirname(self.filePath)
         self.fname = self.filePath.replace(dirname+'/',"")
         print(self.fname)
+    def paintEvent(self, event):
+        opt = QStyleOption()
+        opt.initFrom(self)
+        painter = QPainter(self)
+        self.style().drawPrimitive(QStyle.PE_Widget, opt, painter, self)    

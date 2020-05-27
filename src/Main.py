@@ -124,7 +124,7 @@ class Main(QMainWindow):
         self.bookIn_widget.returnMain_button.clicked.connect(
             self.return_mainView)
         
-        self.bookIn_widget.btnDocNameEkle.clicked.connect(self.btnDocNameEkle)
+        #self.bookIn_widget.btnDocNameEkle.clicked.connect(self.btnDocNameEkle)
 
         self.bookIn_widget.bookIn_single.clicked.connect(
             self.addDocument)
