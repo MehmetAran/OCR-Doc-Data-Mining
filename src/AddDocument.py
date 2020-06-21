@@ -13,15 +13,15 @@ class AddDocumentToSqlite:
     def __init__(self):
         window = Tk()
 
-        window.title("Döküman Ekle")
+        window.title("Doküman Ekle")
 
-        window.geometry('350x200')
+        window.geometry('320x140')
 
-        lbl = Label(window, text="Döküman ismi ")
+        lbl = Label(window, text="Doküman ismi")
 
         lbl.grid(column=0, row=0)
 
-        txt = Entry(window,width=10)
+        txt = Entry(window,width=30)
 
         txt.grid(column=1, row=0)
 
@@ -30,7 +30,7 @@ class AddDocumentToSqlite:
             window.destroy()
             window.quit()
 
-        btn = Button(window, text="Gönder", command=clicked)
+        btn = Button(window, text="Tamam", command=clicked)
 
         btn.grid(column=2, row=0)
 

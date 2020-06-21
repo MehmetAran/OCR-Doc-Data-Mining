@@ -8,7 +8,7 @@ class SearchDialog(QDialog):
     def __init__(self, data,docName,*args, **kwargs):
         self.docName = docName
         super(SearchDialog, self).__init__(*args, **kwargs)
-        self.setWindowTitle("Search user")
+        self.setWindowTitle("Onaylama İşlemi")
         self.setFixedWidth(600)
         self.setFixedHeight(600)
         layout = QVBoxLayout()

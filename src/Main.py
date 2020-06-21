@@ -14,18 +14,12 @@ from DocumentOperations import DocumentOperation
 from AddDocument import AddDocumentToSqlite
 
 class Main(QMainWindow):
-    '''
-    Main
-    '''
 
     def __init__(self):
         super().__init__()
         self.init_ui()
 
     def init_ui(self):
-        '''
-        Genel düzeni başlat
-        '''
         self.title = "DDVT"
         self.resize(1000, 800)
         self.desktopWidth = QApplication.desktop().width()  # Geçerli masaüstünün genişliğini al
@@ -184,11 +178,6 @@ class Main(QMainWindow):
         Dosyayı açın ve metin kutusunda görüntüleyin
         '''
     
-
-
-
-    
-
     def into_BookInView(self):
         '''
         Kitap depolama arayüzüne geçme

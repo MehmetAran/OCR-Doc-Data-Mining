@@ -37,7 +37,7 @@ class DrawableImage:
         crop_img = self.clone[self.tess_point[0][1]:self.tess_point[1][1], self.tess_point[0][0]: 
                                                                self.tess_point[1][0]]
         
-        cv2.imshow("crop_img", crop_img)
+        cv2.imshow("Kırpılan Yer", crop_img)
         print(self.tess_point)
 
     def resize(self):
@@ -91,15 +91,15 @@ class DrawableImage:
     def takeInput(self,inputs):
         window = Tk()
 
-        window.title("Dokümanın Adı")
+        window.title("Kırpma işlemi")
 
-        window.geometry('350x200')
+        window.geometry('320x140')
 
-        lbl = Label(window, text="isim")
+        lbl = Label(window, text="İsim")
 
         lbl.grid(column=0, row=0)
 
-        txt = Entry(window,width=10)
+        txt = Entry(window,width=30)
 
         txt.grid(column=1, row=0)
 
@@ -112,7 +112,7 @@ class DrawableImage:
             window.destroy()
             window.quit()
 
-        btn = Button(window, text="Click Me", command=clicked)
+        btn = Button(window, text="Tamam", command=clicked)
 
         btn.grid(column=2, row=0)
 
