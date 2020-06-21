@@ -13,6 +13,10 @@ from shutil import move, copymode
 from os import fdopen, remove
 import os
 
+# PDF-Image dönüşümleri
+# Folder - Files editleme işlemleri bu class'ın görevi
+
+
 def pdf_to_jpeg(filepath,outpath):
     base=os.path.basename(filepath)
     pages = convert_from_path(filepath, dpi=200)

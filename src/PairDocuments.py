@@ -5,34 +5,38 @@ import os
 import sqlite3
 from sqliteOperations import SqliteOperations
 from shutil import copyfile
-class bookReturn(QWidget):
+
+# Dokümanları ve dokümandaki verilerin aktarılacağı belgeyi eşleştirdiğimiz yer.
+
+
+class PairDocuments(QWidget):
     def __init__(self):
         super().__init__()
         self.init()
 
     def init(self):
-        self.bookReturn_layout = QGridLayout()
-        self.setLayout(self.bookReturn_layout)
+        self.pair_doc_layout = QGridLayout()
+        self.setLayout(self.pair_doc_layout)
 
         self.returnMain_button = QPushButton('Anasayfaya dön')
-        self.bookReturn_layout.addWidget(self.returnMain_button, 0, 0, 1, 6)
+        self.pair_doc_layout.addWidget(self.returnMain_button, 0, 0, 1, 6)
 
         self.documentNameLabel = QLabel('Eşleşecek Belgenin Adı')
-        self.bookReturn_layout.addWidget(self.documentNameLabel, 2, 1, 1, 1)
+        self.pair_doc_layout.addWidget(self.documentNameLabel, 2, 1, 1, 1)
         self.documentNameLabel.setObjectName('bookReturn_label')
         
         self.documentNameText = QLineEdit()
-        self.bookReturn_layout.addWidget(self.documentNameText, 2, 2, 1, 3)
+        self.pair_doc_layout.addWidget(self.documentNameText, 2, 2, 1, 3)
         self.documentNameText.setObjectName('bookReturn_edit')        
         
 
         self.addToSqlBtn = QPushButton('Ekle')
-        self.bookReturn_layout.addWidget(self.addToSqlBtn, 4, 2, 1, 2)
+        self.pair_doc_layout.addWidget(self.addToSqlBtn, 4, 2, 1, 2)
         self.addToSqlBtn.setObjectName('bookReturn_button')
         self.addToSqlBtn.clicked.connect(self.addTargetDocumentToSqlite)
 
-        self.selectDocumentPath = QPushButton('Döküman Seç')
-        self.bookReturn_layout.addWidget(self.selectDocumentPath, 4, 4, 1, 2)
+        self.selectDocumentPath = QPushButton('Dokuman Seç')
+        self.pair_doc_layout.addWidget(self.selectDocumentPath, 4, 4, 1, 2)
         self.selectDocumentPath.setObjectName('bookReturn_button')
         self.selectDocumentPath.clicked.connect(self.chooseFile)
 
@@ -41,7 +45,7 @@ class bookReturn(QWidget):
         
 
         self.record_label = QLabel('')
-        self.bookReturn_layout.addWidget(self.record_label, 5, 2, 1, 2)
+        self.pair_doc_layout.addWidget(self.record_label, 5, 2, 1, 2)
         self.record_label.setObjectName('bookBorrow_already')
 
         self.tableWidget = QTableWidget()
@@ -56,22 +60,22 @@ class bookReturn(QWidget):
         self.tableWidget.verticalHeader().setStretchLastSection(False)
         self.tableWidget.setHorizontalHeaderLabels(("Id", "Doküman Adı", "Hedef Doküman"))
 
-        self.bookReturn_layout.addWidget(self.tableWidget,6, 1, 1, 3)
+        self.pair_doc_layout.addWidget(self.tableWidget,6, 1, 1, 3)
 
-        self.Borrow_button = QPushButton('Dökümanları Getir')
-        self.bookReturn_layout.addWidget(self.Borrow_button, 5, 2, 1, 2)
+        self.Borrow_button = QPushButton('Dokümanları Getir')
+        self.pair_doc_layout.addWidget(self.Borrow_button, 5, 2, 1, 2)
         self.Borrow_button.setObjectName('bookBorrow_button')
         self.Borrow_button.clicked.connect(self.showTable)
 
 
         self.getSelectedDocumentsBtn = QPushButton('Güncelle')
-        self.bookReturn_layout.addWidget(self.getSelectedDocumentsBtn, 5, 1, 1, 1)
+        self.pair_doc_layout.addWidget(self.getSelectedDocumentsBtn, 5, 1, 1, 1)
         self.getSelectedDocumentsBtn.setObjectName('bookBorrow_button')
         self.getSelectedDocumentsBtn.clicked.connect(self.updateAtIndexSQLiteAndTable)
 
 
         self.getSelectedDocumentsBtn = QPushButton('Sil')
-        self.bookReturn_layout.addWidget(self.getSelectedDocumentsBtn, 5, 4, 1, 1)
+        self.pair_doc_layout.addWidget(self.getSelectedDocumentsBtn, 5, 4, 1, 1)
         self.getSelectedDocumentsBtn.setObjectName('bookBorrow_button')
         self.getSelectedDocumentsBtn.clicked.connect(self.deleteAtIndexSQLiteAndTable)
         
@@ -80,7 +84,7 @@ class bookReturn(QWidget):
 
         self.label = QLabel('')
         self.label.setObjectName('bookReturn_title')
-        self.bookReturn_layout.addWidget(self.label, 10, 4, 2, 2)
+        self.pair_doc_layout.addWidget(self.label, 10, 4, 2, 2)
 
     def addTargetDocumentToSqlite(self):
         if(self.fname == ""):

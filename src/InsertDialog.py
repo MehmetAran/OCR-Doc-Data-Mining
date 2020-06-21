@@ -2,6 +2,14 @@ from PyQt5.QtWidgets import *
 import sqlite3
 import os
 from sqliteOperations import SqliteOperations 
+
+
+
+# Dokümanların listelendiği kısımda
+# yeni bir veri eklemek için gerekli olan ui ve veri tabanı
+# işlemleri burda gerçekleşir
+
+
 class InsertDialog(QDialog):
     def __init__(self, *args, **kwargs):
         super(InsertDialog, self).__init__(*args, **kwargs)
@@ -22,7 +30,7 @@ class InsertDialog(QDialog):
         layout = QVBoxLayout()
 
         self.docName = QLineEdit()
-        self.docName.setPlaceholderText("Döküman Adı")
+        self.docName.setPlaceholderText("Dokuman Adı")
         layout.addWidget(self.docName)
 
 

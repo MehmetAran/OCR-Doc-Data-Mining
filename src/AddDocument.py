@@ -6,7 +6,12 @@ import os
 from DrawableImage import DrawableImage 
 from FindTextWithCoordinates import FindTextWithCoordinates
 from sqliteOperations import SqliteOperations
-from SearchDialog import SearchDialog
+
+
+from ApproveScreen import ApproveScreen
+
+
+# Doküman tanımlama işlemleri bu class tarafında yürütülür.
 class AddDocumentToSqlite:
     images = []
     documentKey = ""
@@ -81,7 +86,7 @@ class AddDocumentToSqlite:
 
 
         print("lastResult : ",lastResult)
-        a = SearchDialog(lastResult,self.documentKey)
+        a = ApproveScreen(lastResult,self.documentKey)
         a.exec_()
 
         selected.clear()

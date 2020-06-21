@@ -4,14 +4,16 @@ from PyQt5.QtGui import QCursor, QIcon
 from PyQt5.QtCore import Qt
 import sys
 import os
-from bookIn import bookIn
-from bookIn import multiBookIn
+from ChooseDocumentAndTargetDocument import ChoseDocument
+from ChooseDocumentAndTargetDocument import ChooseTargetDocument
 from leftNavigation import leftNavigation
-from bookBorrow import bookBorrow
-from bookReturn import bookReturn
+from DocumentsCRUDOperations import DocumentCRUDOperations
+from PairDocuments import PairDocuments
 import os
 from DocumentOperations import DocumentOperation 
 from AddDocument import AddDocumentToSqlite
+
+# Bütün işlemlerin yürütüldüğü class
 
 class Main(QMainWindow):
 
@@ -113,20 +115,20 @@ class Main(QMainWindow):
 
     def bookIn_view(self):
         
-        self.bookIn_widget = bookIn()
+        self.bookIn_widget = ChoseDocument()
         self.bookIn_widget.setObjectName('bookIn_widget')
         self.bookIn_widget.returnMain_button.clicked.connect(
             self.return_mainView)
         
         #self.bookIn_widget.btnDocNameEkle.clicked.connect(self.btnDocNameEkle)
 
-        self.bookIn_widget.bookIn_single.clicked.connect(
+        self.bookIn_widget.choose_doc_tool_btn.clicked.connect(
             self.addDocument)
 
-        self.bookIn_widget.bookIn_multi.clicked.connect(
+        self.bookIn_widget.choose_target_doc_tool_btn.clicked.connect(
             self.into_MultiBookInView)
 
-        self.multiBookIn_widget = multiBookIn()
+        self.multiBookIn_widget = ChooseTargetDocument()
         self.multiBookIn_widget.setObjectName('multiBookIn_widget')
         self.multiBookIn_widget.return_button.clicked.connect(
             self.into_BookInView)
@@ -135,13 +137,13 @@ class Main(QMainWindow):
         self.bookIn_widget.hide()
 
     def borrow_view(self):
-        self.bookBorrow_widget = bookBorrow()
+        self.bookBorrow_widget = DocumentCRUDOperations()
         self.bookBorrow_widget.setObjectName('bookBorrow_widget')
         self.bookBorrow_widget.returnMain_button.clicked.connect(self.return_mainView)
         self.bookBorrow_widget.hide()
 
     def return_view(self):
-        self.bookReturn_widget = bookReturn()
+        self.bookReturn_widget = PairDocuments()
         self.bookReturn_widget.setObjectName('bookReturn_widget')
         self.bookReturn_widget.returnMain_button.clicked.connect(self.return_mainView)
         self.bookReturn_widget.hide()

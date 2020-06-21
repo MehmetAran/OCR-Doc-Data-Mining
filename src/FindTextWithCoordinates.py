@@ -22,6 +22,11 @@ import os
 ## data[1] = no , x1 , y1 , x2 , y2
 
 
+
+# Tesseract'tan alınan metinlerin
+# OpenCV yardımıyla alınan koordinatlarla karşılaştırılması
+# gibi işlemleri bu class üstlenir.
+
 class FindTextWithCoordinates:
     left = []
     width = []

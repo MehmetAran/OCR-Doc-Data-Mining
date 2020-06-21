@@ -3,6 +3,9 @@ from PyQt5 import QtGui
 from PyQt5.QtGui import QPainter
 
 
+
+# Genel UI'da sol kısımdaki grafikler ve buttonlar burada yer almaktadır.
+
 class leftNavigation(QWidget):
     '''
     Sol gezinme çubuğu

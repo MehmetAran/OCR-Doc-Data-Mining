@@ -1,6 +1,9 @@
 
 import sqlite3
 import os
+
+# Yerel veri tabanı işlemlerinin yürütüldüğü kısım. 
+
 class SqliteOperations:
     basePath = ""
     conn = None

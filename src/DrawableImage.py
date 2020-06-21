@@ -4,6 +4,10 @@ import os
 import time
 from functools import partial  
 from tkinter  import *
+
+
+# Kullanıcının belgede kırpma işlemi yaptığı class
+
 class DrawableImage:
     ref_point = [] 
     crop = False

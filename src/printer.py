@@ -3,6 +3,9 @@ from tempfile import mkstemp
 from shutil import move, copymode
 from os import fdopen, remove
 import os
+
+# Dokümandan alınan dosyaların , istenen dokümana aktarıldığı kısım
+
 def replaceText(file_path, pattern, subst):
     #Create temp file
     fh, abs_path = mkstemp()
