@@ -14,7 +14,7 @@ Windows işletim sistemlerinde aşağıdaki yönergeler ile sorunsuzca çalışt
 ### Windows : 
 Proje bilgisayarınıza indirildikten sonra Visual Studio Code veya PyCharm gibi idelerde açılmalıdır. 
 
-Python sürümü 3.6 olmalıdır. Bu sürümü indirmek için https://www.python.org/downloads/ [Tıklayın.]
+Python sürümü 3.6 olmalıdır. Bu sürümü indirmek için [tıklayın.](https://www.python.org/downloads/)
 
 İde üzerinde terminal açılarak sırasıyla aşağıdaki yüklemeler yapılmalıdır.
 
