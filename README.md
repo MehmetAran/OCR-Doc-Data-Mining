@@ -7,7 +7,19 @@ Dijital dokümandan veri taşıma uygulamasının temel amacı kullanıcılara d
 Uygulama geliştiriminde python programlama dili kullanılmıştır.
 Kullanılan teknolojiler ise openCV, pyTesseract, pyqt5, tkinter, pdf2image ve poppler kütüphaneleridir.
 
-## Kullanılan Teknolojiler
+Windows işletim sistemlerinde aşağıdaki yönergeler ile sorunsuzca çalıştırılabilir.
+
+## Yüklenmesi Gereken Kütüphaneler
+
+### Windows : 
+Proje bilgisayarınıza indirildikten sonra Visual Studio Code veya PyCharm gibi idelerde açılmalıdır. 
+
+Python sürümü 3.6 olmalıdır. Bu sürümü indirmek için https://www.python.org/downloads/[Tıklayın.]
+
+İde üzerinde terminal açılarak sırasıyla aşağıdaki yüklemeler yapılmalıdır.
+
+
+
 
 ## Uygulama Ekran Görüntüleri
 
