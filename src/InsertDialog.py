@@ -5,7 +5,7 @@ from sqliteOperations import SqliteOperations
 
 
 
-# Dokümanların listelendiği kısımda
+# Dokumanların listelendiği kısımda
 # yeni bir veri eklemek için gerekli olan ui ve veri tabanı
 # işlemleri burda gerçekleşir
 
@@ -30,7 +30,7 @@ class InsertDialog(QDialog):
         layout = QVBoxLayout()
 
         self.docName = QLineEdit()
-        self.docName.setPlaceholderText("Dokuman Adı")
+        self.docName.setPlaceholderText("Doküman Adı")
         layout.addWidget(self.docName)
 
 

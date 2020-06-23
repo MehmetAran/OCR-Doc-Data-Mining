@@ -11,7 +11,7 @@ from sqliteOperations import SqliteOperations
 from ApproveScreen import ApproveScreen
 
 
-# Doküman tanımlama işlemleri bu class tarafında yürütülür.
+# Dokuman tanımlama işlemleri bu class tarafında yürütülür.
 class AddDocumentToSqlite:
     images = []
     documentKey = ""

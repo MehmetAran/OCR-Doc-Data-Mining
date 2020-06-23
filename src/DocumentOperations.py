@@ -11,7 +11,7 @@ import numpy
 import os
 from sqliteOperations import SqliteOperations
 
-# Dokümandaki bütün metinler tesseract yardımıyla alınır 
+# Dokumandaki bütün metinler tesseract yardımıyla alınır 
 # ve bazı filtrelemeler uygulanır.
 # Bu filtrelemeler sonucunda ortaya çıkan son metinler 
 # başka bir belgeye aktarılmaya hazır şekilde döndürülür. 

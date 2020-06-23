@@ -6,7 +6,7 @@ import sqlite3
 from sqliteOperations import SqliteOperations
 from shutil import copyfile
 
-# Dokümanları ve dokümandaki verilerin aktarılacağı belgeyi eşleştirdiğimiz yer.
+# Dokumanları ve Dokumandaki verilerin aktarılacağı belgeyi eşleştirdiğimiz yer.
 
 
 class PairDocuments(QWidget):
@@ -15,6 +15,7 @@ class PairDocuments(QWidget):
         self.init()
 
     def init(self):
+        self.fname = ""
         self.pair_doc_layout = QGridLayout()
         self.setLayout(self.pair_doc_layout)
 
@@ -35,7 +36,7 @@ class PairDocuments(QWidget):
         self.addToSqlBtn.setObjectName('bookReturn_button')
         self.addToSqlBtn.clicked.connect(self.addTargetDocumentToSqlite)
 
-        self.selectDocumentPath = QPushButton('Dokuman Seç')
+        self.selectDocumentPath = QPushButton('Doküman Seç')
         self.pair_doc_layout.addWidget(self.selectDocumentPath, 4, 4, 1, 2)
         self.selectDocumentPath.setObjectName('bookReturn_button')
         self.selectDocumentPath.clicked.connect(self.chooseFile)
@@ -88,11 +89,16 @@ class PairDocuments(QWidget):
 
     def addTargetDocumentToSqlite(self):
         if(self.fname == ""):
+            QMessageBox.information(self, 'Hata','Lütfen Doküman seçin', QMessageBox.Ok)
             return
         if(self.documentNameText.text() == ""):
+            QMessageBox.information(self, 'Hata','Lütfen eşleşecek belgenin adını girin', QMessageBox.Ok)
             return 
-        print(self.documentNameText.text()," : ",self.documentNameText.text())
+
+
         SqliteOperations().insertTargetDocument(self.documentNameText.text(),self.fname)
+        self.showTableWithoutCursor()
+
 
         ## dosyayı kopyala txt-docs klasörüne
         basePath = os.path.abspath('.')
@@ -134,21 +140,46 @@ class PairDocuments(QWidget):
                     self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
            
             self.connection.close()
+            QMessageBox.information(self, 'Bilgilendirme','Bütün veriler yüklendi.', QMessageBox.Ok)
+
+
+
+    def showTableWithoutCursor(self):
+        if QMessageBox.Ok:
+            self.tableWidget.show()
+        basePath = os.path.abspath(".")
+        self.connection = sqlite3.connect(basePath+"/resource/db/sql.db")
+        query = "SELECT * FROM TargetDocuments"
+        result = self.connection.execute(query).fetchall()
+        self.tableWidget.setRowCount(0)
+          
+        for row_number, row_data in enumerate(result):
+            self.tableWidget.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+         
+        self.connection.close()
 
     def deleteAtIndexSQLiteAndTable(self):
-        row = self.tableWidget.currentRow()
-        index0 = self.tableWidget.item(row,0).text()
-        SqliteOperations().deleteFromTargetDocuments(index0)
+        try :
+            row = self.tableWidget.currentRow()
+            index0 = self.tableWidget.item(row,0).text()
+            SqliteOperations().deleteFromTargetDocuments(index0)
+        except:
+            QMessageBox.information(self, 'Hata','Lütfen sileceğiniz satırı seçin.', QMessageBox.Ok)
+
 
         self.tableWidget.removeRow(row)
     def updateAtIndexSQLiteAndTable(self):
-        row = self.tableWidget.currentRow()
-        if(row == ""):
-            return
-        index0 = self.tableWidget.item(row,0).text()
-        index1 = self.tableWidget.item(row,1).text()
-        index2 = self.tableWidget.item(row,2).text()
-
+        try:
+            row = self.tableWidget.currentRow()
+            index0 = self.tableWidget.item(row,0).text()
+            index1 = self.tableWidget.item(row,1).text()
+            index2 = self.tableWidget.item(row,2).text()
+        except:
+            QMessageBox.information(self, 'Hata','Lütfen güncellenecek satırı seçin.', QMessageBox.Ok)
+            return;
         SqliteOperations().updateFromTargetDocuments(index0,index1,index2)
+        QMessageBox.information(self, 'Bilgilendirme','Güncellendi.', QMessageBox.Ok)
 
 

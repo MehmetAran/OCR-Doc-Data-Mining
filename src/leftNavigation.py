@@ -63,7 +63,7 @@ class leftNavigation(QWidget):
         '''
         self.left_label1 = QPushButton('Veritabanı islemleri')
         self.left_label1.setObjectName('left_label')
-        self.left_label2 = QPushButton('Dokuman Islemleri')
+        self.left_label2 = QPushButton('Doküman Islemleri')
         self.left_label2.setObjectName('left_label')
         self.left_label3 = QPushButton('İletişim ve yardım')
         self.left_label3.setObjectName('left_label')

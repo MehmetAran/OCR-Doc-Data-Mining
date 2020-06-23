@@ -53,21 +53,30 @@ class ApproveScreen(QDialog):
                 self.approve_screen_table_widget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
 
     def selectedIndexDelete(self):
-        row = self.approve_screen_table_widget.currentRow()
-        if(row == ""):
+        try : 
+            row = self.approve_screen_table_widget.currentRow()
+        except:
+            QMessageBox.information(self, "Hata",'Lütfen silmek istediğiniz satırı seçiniz.', QMessageBox.Ok)
             return
         self.approve_screen_table_widget.removeRow(row)
-
+    
 
     def selectedIndexAddToSqlite(self):
-        row = self.approve_screen_table_widget.currentRow()
-        if(row == ""):
+        try:
+            row = self.approve_screen_table_widget.currentRow()
+            index0 = self.approve_screen_table_widget.item(row,0).text()
+            index1 = self.approve_screen_table_widget.item(row,1).text()
+            index2 = self.approve_screen_table_widget.item(row,2).text()
+            index3 = self.approve_screen_table_widget.item(row,3).text()
+            index4 = self.approve_screen_table_widget.item(row,4).text()
+        except:
+            QMessageBox.information(self, "Hata",'Lütfen eklemek istediğiniz satırı seçiniz.', QMessageBox.Ok)
             return
-        index0 = self.approve_screen_table_widget.item(row,0).text()
-        index1 = self.approve_screen_table_widget.item(row,1).text()
-        index2 = self.approve_screen_table_widget.item(row,2).text()
-        index3 = self.approve_screen_table_widget.item(row,3).text()
-        index4 = self.approve_screen_table_widget.item(row,4).text()
-
-        SqliteOperations().insert(self.docName,0,index0,index1,index2,index3,index4)
+        
+        try:
+            SqliteOperations().insert(self.docName,0,index0,index1,index2,index3,index4)
+        except:
+            QMessageBox.information(self, "Hata",'Veritabanına eklenirken bir hata oluştu.', QMessageBox.Ok)
+            return
+        QMessageBox.information(self, "Hata",'Eklendi', QMessageBox.Ok)
         self.approve_screen_table_widget.removeRow(row)

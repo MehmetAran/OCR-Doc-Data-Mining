@@ -10,7 +10,7 @@ from shutil import copyfile
 import datetime
 
 
-# Doküman tanıtma işlemleri bu class ile gerçekleşir.
+# Dokuman tanıtma işlemleri bu class ile gerçekleşir.
 
 class ChoseDocument(QWidget):
   
@@ -39,7 +39,7 @@ class ChoseDocument(QWidget):
         self.choose_document_layout.addWidget(self.choose_doc_tool_btn, 3, 1, 2, 2)
 
         self.choose_target_doc_tool_btn = QToolButton()
-        self.choose_target_doc_tool_btn.setText('Hedef Dokuman Sec')
+        self.choose_target_doc_tool_btn.setText('Hedef Doküman Sec')
         self.choose_target_doc_tool_btn.setObjectName('bookInLibrary')
         basePath = os.path.abspath('.')
         self.choose_target_doc_tool_btn.setIcon(
@@ -50,7 +50,7 @@ class ChoseDocument(QWidget):
         self.choose_document_layout.addWidget(self.choose_target_doc_tool_btn, 3, 4, 2, 2)
 
      
-        self.buttom_title_lable = QLabel('Dokuman Tanıt')
+        self.buttom_title_lable = QLabel('Doküman Tanıt')
         self.buttom_title_lable.setObjectName('bookInLibrary_label')
         self.choose_document_layout.addWidget(self.buttom_title_lable, 5, 5, 1, 2)
     
@@ -64,7 +64,7 @@ class ChoseDocument(QWidget):
 
 
 
-# Daha önceden tanımlanan bir belgeden veri alınır ve seçilen dokümana atılır.
+# Daha önceden tanımlanan bir belgeden veri alınır ve seçilen Dokumana atılır.
 
 class ChooseTargetDocument(QWidget):
     def __init__(self):
@@ -78,7 +78,13 @@ class ChooseTargetDocument(QWidget):
         self.return_button = QPushButton('Önceki arayüze dön')
         self.choose_target_doc_layout.addWidget(self.return_button, 0, 0, 1, 6)
 
-        
+        """self.space_label1 = QLabel()
+        self.choose_target_doc_layout.addWidget(self.space_label1, 1, 0, 1, 6)
+        self.space_label1.setObjectName('multiBookIn_spaceLabel1')
+        self.bookDataEdit = QTextEdit()
+        self.bookDataEdit.setObjectName('textEdit')
+        self.data = self.bookDataEdit.toPlainText()  # Metin kutusundaki içeriği döndürür
+        self.choose_target_doc_layout.addWidget(self.bookDataEdit, 2, 1, 4, 4)"""
 
         self.chooseFile_button = QPushButton('Dosya seç')
         self.chooseFile_button.setObjectName('chooseFile')
@@ -112,7 +118,7 @@ class ChooseTargetDocument(QWidget):
                     targetDocument = targetDocumentInformations[2]
                     print(targetDocument)
                 except:
-                    QMessageBox.information(self, 'hata ','hata ', QMessageBox.Ok)
+                    QMessageBox.information(self, 'Hata ','Tanımlı PDF girmediniz.', QMessageBox.Ok)
                     break
                 self.copy(basePath+'/resource/txt-docs/'+targetDocument,folder)
                 print("Belge ismi : " , result[0][0])
@@ -127,6 +133,9 @@ class ChooseTargetDocument(QWidget):
                 newPath = folder +'/'+now+'.txt'
                 os.rename(path,newPath)
                 print(newPath)
+        if(folder == "" or fname=="" ):
+            QMessageBox.information(self, 'Hata','Hatalı seçim yaptınız.', QMessageBox.Ok)
+            return
         QMessageBox.information(self, 'İşlem bitti',' işlem bitti', QMessageBox.Ok)
 
 

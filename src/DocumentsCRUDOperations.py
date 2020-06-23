@@ -6,7 +6,7 @@ import os
 from sqliteOperations import SqliteOperations
 from InsertDialog import InsertDialog
 
-# Dokümanlar ile ilgili CRUD veri tabanı işlemlerinin 
+# Dokumanlar ile ilgili CRUD veri tabanı işlemlerinin 
 # bir arayüz yardımıyla gerçekleştirildi class.
 
 class DocumentCRUDOperations(QWidget):
@@ -63,7 +63,7 @@ class DocumentCRUDOperations(QWidget):
         self.documents_tablewidget.verticalHeader().setVisible(False)
         self.documents_tablewidget.verticalHeader().setCascadingSectionResizes(False)
         self.documents_tablewidget.verticalHeader().setStretchLastSection(False)
-        self.documents_tablewidget.setHorizontalHeaderLabels(("Id", "Döküman Adı", "Sayfa No", "Verilen İsim", "Soldaki Metin", "Sağdaki Metin",
+        self.documents_tablewidget.setHorizontalHeaderLabels(("Id", "Doküman Adı", "Sayfa No", "Verilen İsim", "Soldaki Metin", "Sağdaki Metin",
         "Üstündeki Metin","Altındaki Metin"))
 
         self.doc_layout.addWidget(self.documents_tablewidget, 7, 1, 4, 7)
@@ -91,35 +91,62 @@ class DocumentCRUDOperations(QWidget):
                     self.documents_tablewidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
            
             self.connection.close()
+        QMessageBox.information(self, 'Bilgilendirme','Bütün veriler yüklendi.', QMessageBox.Ok)
 
 
+    def showTableWithout(self):
+        if QMessageBox.Ok:
+            self.documents_tablewidget.show()
+            basePath = os.path.abspath(".")
+            self.connection = sqlite3.connect(basePath+"/resource/db/sql.db")
+            query = "SELECT * FROM Documents"
+            result = self.connection.execute(query).fetchall()
+            self.documents_tablewidget.setRowCount(0)
+            
+            for row_number, row_data in enumerate(result):
+                self.documents_tablewidget.insertRow(row_number)
+                for column_number, data in enumerate(row_data):
+                    self.documents_tablewidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+           
+            self.connection.close()
+        QMessageBox.information(self, 'Bilgilendirme','Yeni eleman eklendi.', QMessageBox.Ok)
 
 
     def deleteAtIndexSQLiteAndTable(self):
-        row = self.documents_tablewidget.currentRow()
-        index0 = self.documents_tablewidget.item(row,0).text()
+        index = 0
+        try :
+            row = self.documents_tablewidget.currentRow()
+            index0 = self.documents_tablewidget.item(row,0).text()
+        except:
+            QMessageBox.information(self, 'hata ','Silinecek satırı seçin. ', QMessageBox.Ok)
+            return
+
         SqliteOperations().delete(index0)
 
         self.documents_tablewidget.removeRow(row)
 
     def addNewDocumentToSQLiteAndRefreshTable(self,cursor):
         InsertDialog().exec_()  
-        self.showTable(cursor)
+        self.showTableWithout()
 
     def updateAtIndexSQLiteAndTable(self):
-        row = self.documents_tablewidget.currentRow()
-        if(row == ""):
-            return
-        index0 = self.documents_tablewidget.item(row,0).text()
-        index1 = self.documents_tablewidget.item(row,1).text()
-        index2 = self.documents_tablewidget.item(row,2).text()
-        index3 = self.documents_tablewidget.item(row,3).text()
-        index4 = self.documents_tablewidget.item(row,4).text()
-        index5 = self.documents_tablewidget.item(row,5).text()
-        index6 = self.documents_tablewidget.item(row,6).text()
-        index7 = self.documents_tablewidget.item(row,7).text()
-
+        row = None
+        try :
+            row = self.documents_tablewidget.currentRow()
+      
+            index0 = self.documents_tablewidget.item(row,0).text()
+            index1 = self.documents_tablewidget.item(row,1).text()
+            index2 = self.documents_tablewidget.item(row,2).text()
+            index3 = self.documents_tablewidget.item(row,3).text()
+            index4 = self.documents_tablewidget.item(row,4).text()
+            index5 = self.documents_tablewidget.item(row,5).text()
+            index6 = self.documents_tablewidget.item(row,6).text()
+            index7 = self.documents_tablewidget.item(row,7).text()
+        except :
+            QMessageBox.information(self, 'Hata ','Güncellenecek satırı seçin.', QMessageBox.Ok)
+            return 
         SqliteOperations().update(index0,index1,index2,index3,index4,index5,index6,index7)
+        QMessageBox.information(self, 'Bilgilendirme','Güncellendi.', QMessageBox.Ok)
 
 
 
@@ -149,4 +176,4 @@ class DocumentCRUDOperations(QWidget):
                     self.documents_tablewidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
            
             self.connection.close()
-        
+            QMessageBox.information(self, 'Bilgilendirme','Filtreli veriler yüklendi.', QMessageBox.Ok)

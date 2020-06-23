@@ -13,7 +13,7 @@ import os
 from DocumentOperations import DocumentOperation 
 from AddDocument import AddDocumentToSqlite
 
-# Bütün işlemlerin yürütüldüğü class
+# Bütün işlemlerin yürütüldüğü
 
 class Main(QMainWindow):
 
