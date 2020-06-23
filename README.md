@@ -22,12 +22,11 @@ Tesseract kurulumu için bilgisayara kurulum yapılabilir ya da terminal üzerin
 
 ## Uygulama Ekran Görüntüleri
 
+<img src="https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app1.png" width="40%" height="40%">
 
-![alt text](https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app1.png)
+<img src="https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app2.png" width="40%" height="40%">
 
-![alt text](https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app2.png)
+<img src="https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app3.png" width="40%" height="40%">
 
+<img src="https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app4.png" width="40%" height="40%">
 
-![alt text](https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app3.png)
-
-![alt text](https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app4.png)
