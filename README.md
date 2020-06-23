@@ -23,3 +23,11 @@ Tesseract kurulumu için bilgisayara kurulum yapılabilir ya da terminal üzerin
 ## Uygulama Ekran Görüntüleri
 
 
+![alt text](https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app1.png)
+
+![alt text](https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app2.png)
+
+
+![alt text](https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app3.png)
+
+![alt text](https://github.com/MehmetAran/OCR-Doc-Data-Mining/tree/master/application_images/app4.png)
