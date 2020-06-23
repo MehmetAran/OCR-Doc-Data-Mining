@@ -5,7 +5,7 @@ Mehmet Aran - Ömer Üstünay 2020 © Lisans Bitirme Tezi Uygulaması
 Dijital dokümandan veri taşıma uygulamasının temel amacı kullanıcılara dijitalleştirilmiş dokümanlar üzerinde istenilen bilgilere kolaylıkla ulaşılabilmesini sağlamak ve bu bilgileri farklı bir dokümanda kullanabilmesini sağlamaktır.
 
 Uygulama geliştiriminde python programlama dili kullanılmıştır.
-Kullanılan teknolojiler ise openCV, pyTesseract, pyqt5, tkinter, pdf2image ve poppler kütüphaneleridir.
+Kullanılan teknolojiler ise openCV, pytesseract, pyqt5, tkinter, pdf2image, sqlite ve poppler kütüphaneleridir.
 
 Windows işletim sistemlerinde aşağıdaki yönergeler ile sorunsuzca çalıştırılabilir.
 
