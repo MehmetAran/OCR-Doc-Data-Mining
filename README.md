@@ -43,7 +43,7 @@ pip install PyQt5
 ```bash
 pip install numpy
 ```
-5. pdf2image 1.13.1 , terminal kodu : pip install pdf2image
+5. pdf2image 1.13.1 sürümünü kurmak için terminal açılır ve aşağıdaki komut girilir.
 
 ```bash
 pip install pdf2image
