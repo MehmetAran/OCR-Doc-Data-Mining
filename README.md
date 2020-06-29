@@ -28,7 +28,7 @@ Tesseract kurulumu için bilgisayara kurulum yapılabilir ya da terminal üzerin
 #### 5. pdf2image 1.13.1 , terminal kodu : pip install pdf2image
 
 ### Kurulum
-#### Kurulum dosyasını indirmek için <a href="https://drive.google.com/file/d/1APh0nbUhflwM78aaSaVwJm_truoH92YI/view?usp=sharing">tıklayabilirsiniz<a/>
+#### Kurulum dosyasını indirmek için <a target="_blank" href="https://drive.google.com/file/d/1APh0nbUhflwM78aaSaVwJm_truoH92YI/view?usp=sharing">tıklayabilirsiniz<a/>
 
 ## Uygulama Ekran Görüntüleri
 
