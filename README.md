@@ -19,21 +19,42 @@ Tesseract kurulumu için bilgisayara kurulum yapılabilir ya da terminal üzerin
 
 İDE üzerinde terminal açılarak sırasıyla aşağıdaki yüklemeler yapılabilmektedir.
 
-### Gerekli kütüphanelerin kurulumları için gereken komutlar : 
 
-#### 1. pytesseract 0.3.4  , terminal kodu : pip install pytesseract 
-#### 2. opencv-python 4.2.0.34 , terminal kodu : pip install opencv-python
-#### 3. PyQt5 5.15.0, terminal kodu : pip install PyQt5
-#### 4. numpy 1.19.0, terminal kodu : pip install numpy
-#### 5. pdf2image 1.13.1 , terminal kodu : pip install pdf2image
+ 1. pytesseract 0.3.4 sürümünü kurmak için terminal açılır ve aşağıdaki komut girilir.
+ 
+```bash
+pip install pytesseract 
+```
+
+ 2. opencv-python 4.2.0.34 sürümünü kurmak için terminal açılır ve aşağıdaki komut girilir.
+
+```bash
+pip install opencv-python
+```
+
+3. PyQt5 5.15.0 sürümünü kurmak için terminal açılır ve aşağıdaki komut girilir.
+
+```bash
+pip install PyQt5
+```
+
+4. numpy 1.19.0 sürümünü kurmak için terminal açılır ve aşağıdaki komut girilir.
+
+```bash
+pip install numpy
+```
+5. pdf2image 1.13.1 , terminal kodu : pip install pdf2image
+
+```bash
+pip install pdf2image
+```
 
 ### Kurulum
-#### Kurulum dosyasını indirmek için <a href="https://drive.google.com/file/d/1APh0nbUhflwM78aaSaVwJm_truoH92YI/view?usp=sharing" target="_blank">tıklayabilirsiniz<a/>
+#### Uygulamanın kurulum(.exe) dosyasını indirmek için <a href="https://drive.google.com/file/d/1APh0nbUhflwM78aaSaVwJm_truoH92YI/view?usp=sharing" target="_blank">tıklayabilirsiniz<a/>
 
 ## Uygulama Ekran Görüntüleri
 
 <img src="https://github.com/MehmetAran/OCR-Doc-Data-Mining/blob/master/application_images/app1.png" width="75%" height="75%">
-Uyuglama anasayfa görüntüsü bu şekildedir.
 
 <img src="https://github.com/MehmetAran/OCR-Doc-Data-Mining/blob/master/application_images/app2.png" width="75%" height="75%">
 
