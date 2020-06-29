@@ -17,8 +17,15 @@ Proje bilgisayarınıza indirildikten sonra Visual Studio Code veya PyCharm gibi
 Python sürümü 3.6 olmalıdır. Bu sürümü indirmek için [tıklayın.](https://www.python.org/downloads/)
 Tesseract kurulumu için bilgisayara kurulum yapılabilir ya da terminal üzerinden pip komutu ile kurulum yapılabilir.
 
-İde üzerinde terminal açılarak sırasıyla aşağıdaki yüklemeler yapılmalıdır.
+İDE üzerinde terminal açılarak sırasıyla aşağıdaki yüklemeler yapılabilmektedir.
 
+### Gerekli kütüphanelerin kurulumları için gereken komutlar : 
+
+#### 1. pytesseract 0.3.4  , terminal kodu : pip install pytesseract 
+#### 2. opencv-python 4.2.0.34 , terminal kodu : pip install opencv-python
+#### 3. PyQt5 5.15.0, terminal kodu : pip install PyQt5
+#### 4. numpy 1.19.0, pip install numpy
+#### 5. pdf2image 1.13.1 , pip install pdf2image
 
 ## Uygulama Ekran Görüntüleri
 
