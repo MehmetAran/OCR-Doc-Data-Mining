@@ -50,8 +50,6 @@ class AddDocumentToSqlite:
         self.images = ffo.all_files_in_folder(basepath +'/resource/images')
         k = 0
         for image in self.images:
-            print(image)
-            print(self.images)
             selectedItems = DrawableImage().run(image,k)
             k += 1
         counter = 0
@@ -61,7 +59,7 @@ class AddDocumentToSqlite:
         names = []
         lastResult = []
         for i in selectedItems :
-            print(i)
+            #print(i)
             if(i[0] == k):
                 results = selected.append([i[1],i[2],i[3],i[4],i[5]]),
                 names.append(i[1])
@@ -85,7 +83,7 @@ class AddDocumentToSqlite:
                     
 
 
-        print("lastResult : ",lastResult)
+        #print("lastResult : ",lastResult)
         a = ApproveScreen(lastResult,self.documentKey)
         a.exec_()
 

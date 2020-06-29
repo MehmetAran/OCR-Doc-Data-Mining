@@ -169,7 +169,7 @@ class DocumentCRUDOperations(QWidget):
          
 
             self.documents_tablewidget.setRowCount(0)
-            print(result)
+            #print(result)
             for row_number, row_data in enumerate(result):
                 self.documents_tablewidget.insertRow(row_number)
                 for column_number, data in enumerate(row_data):

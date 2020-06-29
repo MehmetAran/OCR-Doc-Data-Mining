@@ -31,7 +31,7 @@ class DocumentOperation:
         replacedText = ""
         parsedDataFromAllDocument = []
         for image in images:
-            text = pytesseract.image_to_string(image=image ,lang="tur")
+            text = pytesseract.image_to_string(image=image ,lang="tur",)
             imageDataText = text
             text = text.replace('\n','').replace(' ','').replace('\t','')
             replacedText = text

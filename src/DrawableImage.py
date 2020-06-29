@@ -42,7 +42,7 @@ class DrawableImage:
                                                                self.tess_point[1][0]]
         
         cv2.imshow("Kırpılan Yer", crop_img)
-        print(self.tess_point)
+        #print(self.tess_point)
 
     def resize(self):
         i = 1;
@@ -53,7 +53,7 @@ class DrawableImage:
                 i += (0.02);
             else:
                 break;
-        print("scalawidth : " , self.scalaWidth," scalaheight : ",self.scalaHeight)
+        #print("scalawidth : " , self.scalaWidth," scalaheight : ",self.scalaHeight)
 
     def run(self,imagePath,pageNum):
         self.clones.clear()
@@ -110,9 +110,9 @@ class DrawableImage:
         def clicked():
             res =txt.get()
             self.selectedItems.append([self.pageNum,res,inputs[0][0],inputs[1][0],inputs[0][1],inputs[1][1]])
-            print("************************ Veriler ********************** ")
-            for input in self.selectedItems:
-                print(input)
+            #print("************************ Veriler ********************** ")
+            #for input in self.selectedItems:
+                #print(input)
             window.destroy()
             window.quit()
 

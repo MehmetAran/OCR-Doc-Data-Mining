@@ -102,7 +102,7 @@ class PairDocuments(QWidget):
 
         ## dosyayı kopyala txt-docs klasörüne
         basePath = os.path.abspath('.')
-        print("filePath",self.filePath)
+        #print("filePath",self.filePath)
         self.copy(self.filePath,basePath+"/resource/txt-docs")
     
     def copy(self,src, dst):
@@ -116,7 +116,7 @@ class PairDocuments(QWidget):
         self.filePath = self.filePath[0]
         dirname = os.path.dirname(self.filePath)
         self.fname = self.filePath.replace(dirname+'/',"")
-        print(self.fname)
+        #print(self.fname)
     def paintEvent(self, event):
         opt = QStyleOption()
         opt.initFrom(self)

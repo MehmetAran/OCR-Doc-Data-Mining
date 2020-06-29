@@ -102,28 +102,28 @@ class ChooseTargetDocument(QWidget):
             self, 'Hedef Klasör Seç', './', QFileDialog.ShowDirsOnly
                                                 | QFileDialog.DontResolveSymlinks)
 
-        print("folderPath : ",folder)
+        #print("folderPath : ",folder)
 
         if(folder != ""):
             docOpr =DocumentOperation()
             results = docOpr.readDoc(filePath)
             basePath = os.path.abspath('.')
             for result in results:
-                print("*******************************")
+                #print("*******************************")
                 # Belge isminden TargetDocuments  tablosuna istek atılacak
                 #Eğer eşleşen varsa o dosyayı printer ile yazdıracak
                 targetDocument = ""
                 try :
                     targetDocumentInformations = SqliteOperations().findByDocumentNameFromTargetDocuments(result[0][0])
                     targetDocument = targetDocumentInformations[2]
-                    print(targetDocument)
+                    #print(targetDocument)
                 except:
                     QMessageBox.information(self, 'Hata ','Tanımlı PDF girmediniz.', QMessageBox.Ok)
-                    break
+                    continue
                 self.copy(basePath+'/resource/txt-docs/'+targetDocument,folder)
-                print("Belge ismi : " , result[0][0])
+                #print("Belge ismi : " , result[0][0])
                 for r in result : 
-                    print(r[1] ," : ", r[2])
+                    #print(r[1] ," : ", r[2])
                     path = folder+'/' + targetDocument
                     pattern = "@@"+ r[1]
                     subst = r[2]
@@ -132,7 +132,7 @@ class ChooseTargetDocument(QWidget):
                 now = str(datetime.datetime.now().strftime("%Y%m%d %H:%M:%S.%f")).replace(' ','').replace(':','')
                 newPath = folder +'/'+now+'.txt'
                 os.rename(path,newPath)
-                print(newPath)
+                #print(newPath)
         if(folder == "" or fname=="" ):
             QMessageBox.information(self, 'Hata','Hatalı seçim yaptınız.', QMessageBox.Ok)
             return

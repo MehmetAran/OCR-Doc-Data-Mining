@@ -12,15 +12,14 @@ from PairDocuments import PairDocuments
 import os
 from DocumentOperations import DocumentOperation 
 from AddDocument import AddDocumentToSqlite
-
 # Bütün işlemlerin yürütüldüğü
-
+import path_variable
 class Main(QMainWindow):
 
     def __init__(self):
         super().__init__()
         self.init_ui()
-
+        path_variable.init_path()
     def init_ui(self):
         self.title = "DDVT"
         self.resize(1000, 800)
@@ -161,8 +160,8 @@ class Main(QMainWindow):
 
 
     def btnDocNameEkle(self):
-
-        print("degeri buradan alcaz")
+        pass
+        #print("degeri buradan alcaz")
 
 
     def addDocument(self):

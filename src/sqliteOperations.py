@@ -63,7 +63,7 @@ class SqliteOperations:
         return documentIndexes
 
     def findByDocumentNameFromTargetDocuments(self,documentName):
-        print(documentName)
+        #print(documentName)
         c = self.conn.cursor()
         c.execute("select * from TargetDocuments where documentName=?",(documentName,))
         document = c.fetchone()
@@ -71,7 +71,7 @@ class SqliteOperations:
         return document
 
     def insertTargetDocument(self,documentName,targetDocument):
-        print(documentName,",",targetDocument)
+        #print(documentName,",",targetDocument)
         c = self.conn.cursor()
         c.execute("INSERT INTO TargetDocuments(documentName,targetDocument) VALUES (?,?)",
         (documentName,targetDocument))
@@ -81,7 +81,7 @@ class SqliteOperations:
 
 a = SqliteOperations().findByDocumentNameFromTargetDocuments("YÜKSEK LİSANS TEZ KONUSU BİLDİRİM FORMU")
 
-print(a)"""
+#print(a)"""
 """
 a = SqliteOperations()
 a.insert("mehmet",1,"deneme1","deneme2","deneme3","deneme4","deneme5")
@@ -89,7 +89,7 @@ a.update(10,"1",1,"1","1","1","1","1")
 a.delete(15)
 results = a.findByDocumentName("1")
 for result in results:
-    print(result)
+    #print(result)
 results = a.getAll()
 for result in results:
-    print(result)"""
+    #print(result)"""

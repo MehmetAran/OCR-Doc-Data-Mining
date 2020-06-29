@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import pytesseract
 import re
 
 # get grayscale image
@@ -67,7 +66,7 @@ def deskew(image):
     	(10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
      
     # show the output image
-    print("[INFO] angle: {:.3f}".format(angle))
+    #print("[INFO] angle: {:.3f}".format(angle))
     cv2.imshow("Input", image)
     cv2.imshow("Rotated", rotated)
     cv2.waitKey(0)

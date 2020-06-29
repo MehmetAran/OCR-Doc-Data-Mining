@@ -19,7 +19,9 @@ import os
 
 def pdf_to_jpeg(filepath,outpath):
     base=os.path.basename(filepath)
-    pages = convert_from_path(filepath, dpi=200)
+    #,poppler_path= r'C:\Users\warri\Desktop\OCR-Doc-Data-Mining\src\bin\poppler-0.68.0\bin'
+    popplerPath = os.path.abspath(".")+"/resource/bin/poppler-0.68.0/bin"
+    pages = convert_from_path(pdf_path=filepath, dpi=200,poppler_path= r''+popplerPath)
     for idx,page in enumerate(pages):
         page.save(outpath +"/"+ os.path.splitext(base)[0]+"_"+str(idx)+'.jpg', 'JPEG')
         page_idx = 0
