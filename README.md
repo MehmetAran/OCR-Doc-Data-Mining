@@ -27,6 +27,9 @@ Tesseract kurulumu için bilgisayara kurulum yapılabilir ya da terminal üzerin
 #### 4. numpy 1.19.0, terminal kodu : pip install numpy
 #### 5. pdf2image 1.13.1 , terminal kodu : pip install pdf2image
 
+### Kurulum
+#### Kurulum dosyasını indirmek için <a href="https://drive.google.com/file/d/1APh0nbUhflwM78aaSaVwJm_truoH92YI/view?usp=sharing">tıklayabilirsiniz<a/>
+
 ## Uygulama Ekran Görüntüleri
 
 <img src="https://github.com/MehmetAran/OCR-Doc-Data-Mining/blob/master/application_images/app1.png" width="75%" height="75%">
